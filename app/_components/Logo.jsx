@@ -5,15 +5,16 @@ import Link from "next/link";
 function Logo() {
   return (
     <Link href="/" className="flex items-center gap-4 z-10">
-      <Image
-        src="/images/pizza-icon.png"
-        alt="Pizza Passion Logo"
-        width={60}
-        height={60}
-        quality={100}
-      />
-      {/* <Image src={logo} alt="Pizza Passion Logo" /> */}
-      <span className="font-semibold text-xl text-primary-100">
+      <div className="relative w-10 aspect-square sm:w-14 md:w-16">
+        <Image
+          src="/images/pizza-icon.png"
+          alt="Pizza Passion Logo"
+          fill
+          quality={100}
+          className="object-cover"
+        />
+      </div>
+      <span className="font-semibold text-lg sm:text-xl md:text-2xl uppercase text-accent-500">
         Pizza Passion
       </span>
     </Link>

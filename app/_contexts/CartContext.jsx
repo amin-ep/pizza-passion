@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useTransition,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { addPizzaToCart, getCart, removePizzaFromCart } from "../_lib/actions";
 
 const initialState = {
@@ -18,11 +12,14 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "status":
+    case "loading":
       return { ...state, status: "loading" };
 
     case "idle":
       return { ...state, status: "idle" };
+
+    case "updating":
+      return { ...state, status: "updating" };
 
     case "cartItems":
       return { ...state, cartItems: action.payload };
@@ -60,17 +57,14 @@ const CartContext = createContext();
 function CartProvider({ children }) {
   const [{ status, cartItems, cartTotalQuantity, cartTotalPrice }, dispatch] =
     useReducer(reducer, initialState);
-  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     (async () => {
-      const cart = await getCart();
-      if (typeof cart === "string") {
+      try {
         dispatch({
-          type: "totalData",
-          payload: 0,
+          type: "loading",
         });
-      } else {
+        const cart = await getCart();
         dispatch({
           type: "totalData",
           payload: {
@@ -82,36 +76,60 @@ function CartProvider({ children }) {
           type: "cartItems",
           payload: cart?.data.cart.cartItems,
         });
+      } catch (err) {
+        dispatch({
+          type: "totalData",
+          payload: 0,
+        });
+      } finally {
+        dispatch({
+          type: "idle",
+        });
       }
     })();
   }, []);
 
   const handleAddItemToCart = async (pizzaId) => {
-    let updatedCartItems = cartItems;
-    const result = await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] });
-    const addedPizza = result.data.cart.cartItems.find(
-      (el) => el.pizza._id === pizzaId
-    );
-    const addedPizzaIndex = updatedCartItems.findIndex(
-      (el) => el._id === addedPizza._id
-    );
-    console.log(addedPizza);
-    if (addedPizzaIndex === -1) {
-      updatedCartItems = [...updatedCartItems, addedPizza];
-    } else {
-      updatedCartItems[addedPizzaIndex].quantity += 1;
+    try {
+      dispatch({
+        type: "updating",
+      });
+      let updatedCartItems = cartItems;
+      const result = await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] });
+      const addedPizza = result?.data?.cart?.cartItems.find(
+        (el) => el.pizza._id === pizzaId
+      );
+      const addedPizzaIndex = updatedCartItems.findIndex(
+        (el) => el._id === addedPizza?._id
+      );
+
+      if (addedPizzaIndex === -1) {
+        updatedCartItems = [...updatedCartItems, addedPizza];
+      } else {
+        updatedCartItems[addedPizzaIndex].quantity += 1;
+      }
+      dispatch({
+        type: "add",
+        payload: {
+          cartItems: updatedCartItems,
+          addedItemPrice: addedPizza?.pizza?.finalPrice,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({
+        type: "idle",
+      });
     }
-    dispatch({
-      type: "add",
-      payload: {
-        cartItems: updatedCartItems,
-        addedItemPrice: addedPizza.pizza.finalPrice,
-      },
-    });
   };
 
   const handleRemovePizza = async (pizzaId) => {
-    await removePizzaFromCart(pizzaId).then(() => {
+    try {
+      dispatch({
+        type: "updating",
+      });
+      await removePizzaFromCart(pizzaId);
       let updatedCartItems = cartItems;
       const itemIndex = updatedCartItems.findIndex(
         (el) => el.pizza._id === pizzaId
@@ -129,7 +147,13 @@ function CartProvider({ children }) {
         type: "remove",
         payload: updatedCartItems,
       });
-    });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({
+        type: "idle",
+      });
+    }
   };
 
   return (
@@ -157,4 +181,4 @@ const useCart = () => {
   return context;
 };
 
-export { useCart, CartProvider };
+export { CartProvider, useCart };

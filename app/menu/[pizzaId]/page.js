@@ -65,7 +65,9 @@ async function Page({ params }) {
             )}
           </div>
         </div>
-        <QuantitySelector pizzaId={pizzaId} />
+        <div className="flex items-center justify-end p-5">
+          <QuantitySelector pizzaId={pizzaId} />
+        </div>
       </div>
     </div>
   );

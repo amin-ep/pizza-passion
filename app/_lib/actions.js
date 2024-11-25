@@ -204,6 +204,8 @@ export async function addPizzaToCart(payload) {
     }
   );
 
+  revalidatePath("/cart");
+
   return response.data;
 }
 
@@ -224,6 +226,7 @@ export async function removePizzaFromCart(id) {
         },
       }
     );
+    revalidatePath("/cart");
 
     return res.data;
   } catch (err) {

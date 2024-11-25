@@ -47,7 +47,7 @@ label {
 
 @layer components {
     .btn {
-        @apply bg-accent-500 px-5 py-3 text-primary-800 font-semibold hover:bg-accent-600 text-center flex items-center justify-center transition-all disabled:cursor-not-allowed
+        @apply bg-accent-500 outline-none px-5 py-3 text-primary-800 font-semibold hover:bg-accent-600 text-center flex items-center justify-center transition-all disabled:cursor-not-allowed
     }
 
     .input {
