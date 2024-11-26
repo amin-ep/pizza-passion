@@ -1,7 +1,12 @@
 "use client";
 
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { addPizzaToCart, getCart, removePizzaFromCart } from "../_lib/actions";
+import {
+  addPizzaToCart,
+  deleteCart,
+  getCart,
+  removePizzaFromCart,
+} from "../_lib/actions";
 
 const initialState = {
   status: "idle",
@@ -21,8 +26,19 @@ const reducer = (state, action) => {
     case "updating":
       return { ...state, status: "updating" };
 
+    case "deleting":
+      return { ...state, status: "deleting" };
+
     case "cartItems":
       return { ...state, cartItems: action.payload };
+
+    case "delete":
+      return {
+        ...state,
+        cartItems: [],
+        cartTotalPrice: 0,
+        cartTotalQuantity: 0,
+      };
 
     case "add":
       return {
@@ -90,46 +106,31 @@ function CartProvider({ children }) {
   }, []);
 
   const handleAddItemToCart = async (pizzaId) => {
-    try {
-      dispatch({
-        type: "updating",
-      });
-      let updatedCartItems = cartItems;
-      const result = await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] });
-      const addedPizza = result?.data?.cart?.cartItems.find(
-        (el) => el.pizza._id === pizzaId
-      );
-      const addedPizzaIndex = updatedCartItems.findIndex(
-        (el) => el._id === addedPizza?._id
-      );
+    let updatedCartItems = cartItems;
+    const result = await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] });
+    const addedPizza = result?.data?.cart?.cartItems.find(
+      (el) => el.pizza._id === pizzaId
+    );
+    const addedPizzaIndex = updatedCartItems.findIndex(
+      (el) => el._id === addedPizza?._id
+    );
 
-      if (addedPizzaIndex === -1) {
-        updatedCartItems = [...updatedCartItems, addedPizza];
-      } else {
-        updatedCartItems[addedPizzaIndex].quantity += 1;
-      }
-      dispatch({
-        type: "add",
-        payload: {
-          cartItems: updatedCartItems,
-          addedItemPrice: addedPizza?.pizza?.finalPrice,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    } finally {
-      dispatch({
-        type: "idle",
-      });
+    if (addedPizzaIndex === -1) {
+      updatedCartItems = [...updatedCartItems, addedPizza];
+    } else {
+      updatedCartItems[addedPizzaIndex].quantity += 1;
     }
+    dispatch({
+      type: "add",
+      payload: {
+        cartItems: updatedCartItems,
+        addedItemPrice: addedPizza?.pizza?.finalPrice,
+      },
+    });
   };
 
   const handleRemovePizza = async (pizzaId) => {
-    try {
-      dispatch({
-        type: "updating",
-      });
-      await removePizzaFromCart(pizzaId);
+    await removePizzaFromCart(pizzaId).then(() => {
       let updatedCartItems = cartItems;
       const itemIndex = updatedCartItems.findIndex(
         (el) => el.pizza._id === pizzaId
@@ -146,6 +147,18 @@ function CartProvider({ children }) {
       dispatch({
         type: "remove",
         payload: updatedCartItems,
+      });
+    });
+  };
+
+  const handleDeleteCart = async (id) => {
+    try {
+      dispatch({
+        type: "deleting",
+      });
+      await deleteCart(id);
+      dispatch({
+        type: "delete",
       });
     } catch (err) {
       console.log(err);
@@ -165,6 +178,7 @@ function CartProvider({ children }) {
         cartTotalPrice,
         addToCart: handleAddItemToCart,
         removeFromCart: handleRemovePizza,
+        deleteCartById: handleDeleteCart,
       }}
     >
       {children}

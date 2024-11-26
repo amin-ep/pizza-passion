@@ -3,6 +3,8 @@ import axios from "axios";
 import CartList from "../_components/CartList";
 import LinkButton from "../_components/LinkButton";
 import Image from "next/image";
+import { deleteCart } from "../_lib/actions";
+import DeleteCartButton from "../_components/DeleteCartButton";
 
 export const metadata = {
   title: "Cart",
@@ -37,7 +39,7 @@ async function Page() {
         <>
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">Cart</h1>
-            <LinkButton>Delete All</LinkButton>
+            <DeleteCartButton id={cart.data.cart._id} />
           </div>
           <h2 className="text-sm text-primary-500 mt-4">
             {cart.data.cart.cartItems.length} Products

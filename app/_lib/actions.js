@@ -235,20 +235,26 @@ export async function removePizzaFromCart(id) {
 }
 
 export async function deleteCart(id) {
-  const token = cookies().get(process.env.JWT_SECRET)?.value;
+  try {
+    const token = cookies().get(process.env.JWT_SECRET)?.value;
 
-  if (!token) {
-    throw new Error("You must be logged in");
+    if (!token) {
+      throw new Error("You must be logged in");
+    }
+
+    const res = await axios.delete(`${process.env.API_BASE_URL}/cart/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    revalidatePath("/cart");
+
+    return res.data;
+  } catch (err) {
+    return err.response.data.message;
   }
-
-  const res = await axios.delete(`${process.env.API_BASE_URL}/cart/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
-
-  return res.data;
 }
 export async function getCart() {
   try {
