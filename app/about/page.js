@@ -11,13 +11,12 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3 relative">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+    <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-5 lg:gap-x-24 lg:gap-y-32 text-lg items-center px-4 lg:px-0">
+      <div className="lg:col-span-3 relative text-center lg:text-left">
+        <h1 className="text-3xl lg:text-4xl mb-6 lg:mb-10 text-accent-400 font-medium">
           Welcome to Pizza Passion
         </h1>
-
-        <div className="space-y-8">
+        <div className="space-y-6 lg:space-y-8">
           <p>
             Welcome to Pizza Passion, your one-stop solution for satisfying your
             pizza cravings from the comfort of your home. At Pizza Passion, we
@@ -29,30 +28,29 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="col-span-2 relative">
+      <div className="lg:col-span-2 relative">
         <Image
           placeholder="blur"
-          className="object-cover"
+          className="object-cover w-full h-auto"
           src={image1}
           alt="Pizzas on each other"
         />
       </div>
 
-      <div className="col-span-2 relative">
+      <div className="lg:col-span-2 relative">
         <Image
           placeholder="blur"
-          className="object-cover"
+          className="object-cover w-full h-auto"
           src={image2}
           alt="Chef is making pizza"
         />
       </div>
 
-      <div className="col-span-3 relative">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+      <div className="lg:col-span-3 relative text-center lg:text-left">
+        <h1 className="text-3xl lg:text-4xl mb-6 lg:mb-10 text-accent-400 font-medium">
           How It Works
         </h1>
-
-        <div className="space-y-8">
+        <div className="space-y-6 lg:space-y-8">
           <p>
             Ordering your favorite pizza is just a few clicks away! Choose from
             our range of pizzas, add sides and drinks, and customize your order
@@ -62,12 +60,12 @@ export default function Page() {
           </p>
         </div>
       </div>
-      <div className="col-span-3 relative">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+
+      <div className="lg:col-span-3 relative text-center lg:text-left">
+        <h1 className="text-3xl lg:text-4xl mb-6 lg:mb-10 text-accent-400 font-medium">
           Our Story
         </h1>
-
-        <div className="space-y-8">
+        <div className="space-y-6 lg:space-y-8">
           <p>
             Pizza Passion started with a simple idea: to make delicious,
             high-quality pizza accessible to everyone without the hassle. Since
@@ -79,41 +77,39 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="col-span-2 relative">
+      <div className="lg:col-span-2 relative">
         <Image
-          className="object-cover"
+          className="object-cover w-full h-auto"
           placeholder="blur"
           src={image3}
           alt="Pizzas on each other"
         />
       </div>
 
-      <div className="col-span-2 relative">
+      <div className="lg:col-span-2 relative">
         <Image
-          className="object-cover"
+          className="object-cover w-full h-auto"
           placeholder="blur"
           src={image4}
           alt="Family is eating pizza"
         />
       </div>
 
-      <div className="col-span-3 relative">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+      <div className="lg:col-span-3 relative text-center lg:text-left">
+        <h1 className="text-3xl lg:text-4xl mb-6 lg:mb-10 text-accent-400 font-medium">
           Our Promise
         </h1>
-
-        <div className="space-y-8">
+        <div className="space-y-6 lg:space-y-8">
           <p>
             We are committed to bringing you the best pizza experience with
             every order. From the quality of our ingredients to our fast and
             reliable delivery, everything we do is focused on your satisfaction.
-            We’re here to make your pizza moments memorable.
+            We&apos;re here to make your pizza moments memorable.
           </p>
-
           <div>
             <Link
               href="/menu"
-              className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
+              className="inline-block mt-4 bg-accent-500 px-6 py-4 text-primary-800 text-base lg:text-lg font-semibold hover:bg-accent-600 transition-all"
             >
               Order Delicious Pizzas
             </Link>

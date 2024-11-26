@@ -10,7 +10,7 @@ function NavigationCartLink() {
   return (
     <li>
       <Link href="/cart" className="relative">
-        <HiOutlineShoppingBag size={35} />
+        <HiOutlineShoppingBag className="text-3xl lg:text-4xl" />
         <span className="absolute -bottom-2 -right-[8px] text-sm bg-accent-500 w-5 aspect-square rounded-full text-primary-900 font-bold flex items-center justify-center">
           {cartTotalQuantity || 0}
         </span>

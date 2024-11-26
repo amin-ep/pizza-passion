@@ -4,8 +4,8 @@ import Link from "next/link";
 
 function PizzaCard({ pizza }) {
   return (
-    <div className="grid grid-cols-[150px_1fr] min-h-40 w-full border border-primary-900">
-      <div className="h-full relative">
+    <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] min-h-40 w-full border border-primary-800">
+      <div className="h-56 sm:h-full relative">
         <Image
           src={`http://localhost:8080/static/${pizza.imageUrl}`}
           alt="pizza image"
@@ -14,7 +14,7 @@ function PizzaCard({ pizza }) {
         />
       </div>
       <div className="grid grid-cols-1 grid-rows-[120px_50px] items-between">
-        <div className="p-3 border-b border-primary-900">
+        <div className="p-3 border-b border-primary-800">
           <p className="text-accent-500 text-2xl font-semibold">{pizza.name}</p>
           <p>Ingredients: {pizza.ingredients.join(", ")}</p>
         </div>
@@ -39,7 +39,7 @@ function PizzaCard({ pizza }) {
           </div>
 
           <Link
-            className="h-full w-full border-l border-primary-900 flex items-center px-4 text-primary-100 hover:bg-accent-500 transition hover:text-primary-800"
+            className="h-full w-full border-l border-primary-800 flex items-center px-4 text-primary-100 hover:bg-accent-500 transition hover:text-primary-800"
             href={`/menu/${pizza._id}`}
           >
             More details

@@ -13,8 +13,8 @@ function Page() {
         alt="Pizza"
         className="object-cover object-top"
       />
-      <div className="text-center relative z-10">
-        <h1 className="text-8xl text-primary-50 mb-10 tracking-tighter font-normal">
+      <div className="text-center relative">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl text-primary-50 mb-10 tracking-tighter font-normal">
           Welcome To Pizza Passion
         </h1>
         <Link

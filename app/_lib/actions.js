@@ -77,7 +77,7 @@ export async function getMe() {
 
     return response.data;
   } catch {
-    return false;
+    return err.response.data.message;
   }
 }
 
@@ -266,6 +266,34 @@ export async function getCart() {
 
     if (res.data.status === "success") return res.data;
     if (res.data.status === "fail") return "your cart is empty";
+  } catch (err) {
+    return err.response.data.message;
+  }
+}
+
+export async function ratePizzaById(id, rate) {
+  console.log(id, rate);
+  try {
+    const token = cookies().get(process.env.JWT_SECRET)?.value;
+
+    if (!token) {
+      throw new Error("You must be logged in");
+    }
+
+    const res = await axios.put(
+      `${process.env.API_BASE_URL}/pizza/${id}`,
+      { rate: rate },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    revalidatePath(`/menu/${id}`);
+
+    return res.data;
   } catch (err) {
     return err.response.data.message;
   }

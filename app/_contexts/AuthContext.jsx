@@ -15,6 +15,7 @@ const AuthContext = createContext();
 const initialState = {
   isLoggedIn: false,
   userData: {},
+  status: "",
 };
 
 const reducer = (state, action) => {
@@ -24,11 +25,20 @@ const reducer = (state, action) => {
 
     case "logout":
       return { ...state, isLoggedIn: false, userData: {} };
+
+    case "loading":
+      return { ...state, status: "loading" };
+
+    case "idle":
+      return { ...state, status: "idle" };
+
+    default:
+      throw new Error("Unknown action type");
   }
 };
 
 const AuthProvider = ({ children }) => {
-  const [{ isLoggedIn, userData }, dispatch] = useReducer(
+  const [{ isLoggedIn, userData, status }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -49,23 +59,34 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const userData = await getMe();
-
-      if (userData) {
+      try {
         dispatch({
-          type: "signin",
-          payload: userData.data.user,
+          type: "loading",
         });
-      } else {
+        const userData = await getMe();
+
+        if (userData) {
+          dispatch({
+            type: "signin",
+            payload: userData.data.user,
+          });
+        } else {
+          dispatch({
+            type: "logout",
+          });
+        }
+      } catch (err) {
+        return err;
+      } finally {
         dispatch({
-          type: "logout",
+          type: "idle",
         });
       }
     })();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userData, login }}>
+    <AuthContext.Provider value={{ isLoggedIn, userData, login, status }}>
       {children}
     </AuthContext.Provider>
   );

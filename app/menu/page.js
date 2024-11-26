@@ -13,9 +13,11 @@ export default function Page({ searchParams }) {
   const filter = searchParams?.finalPrice ?? "all";
   return (
     <div>
-      <h1 className="text-4xl mb-5 text-accent-400 font-medium">Our Menu</h1>
+      <h1 className="text-3xl sm:text-4xl mb-5 text-accent-400 font-medium">
+        Our Menu
+      </h1>
 
-      <p className="text-primary-200 text-lg mb-10">
+      <p className="text-primary-200 text-base sm:text-lg mb-10">
         Pizza Passion&apos;s menu brings authentic Italian flavors to your
         table. Savor classics like Margherita with mozzarella and basil, or try
         our bold Pepperoni Passion. Our Veggie Delight and BBQ Chicken Supreme

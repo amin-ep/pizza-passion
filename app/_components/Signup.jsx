@@ -10,6 +10,7 @@ function Signup() {
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col">
@@ -23,49 +24,49 @@ function Signup() {
           {...register("fullName")}
         />
       </div>
-      <div className="flex flex-row justify-between gap-3">
-        <div className="flex flex-col">
+      <div className="flex flex-col lg:flex-row justify-between gap-3">
+        <div className="flex flex-col w-full">
           <label className="w-fit" htmlFor="email">
             *Email
           </label>
           <input
             type="text"
-            className="input"
+            className="input w-full"
             id="email"
             {...register("email")}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <label className="w-fit" htmlFor="phone">
             Phone number
           </label>
           <input
             type="text"
-            className="input"
+            className="input w-full"
             id="phone"
             {...register("phone")}
           />
         </div>
       </div>
-      <div className="flex flex-row justify-between gap-3">
-        <div className="flex flex-col">
+      <div className="flex flex-col lg:flex-row justify-between gap-3">
+        <div className="flex flex-col w-full">
           <label className="w-fit" htmlFor="password">
             *Password
           </label>
           <input
             type="password"
-            className="input"
+            className="input w-full"
             id="password"
             {...register("password")}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <label className="w-fit" htmlFor="confirmPassword">
             *Confirm Password
           </label>
           <input
             type="password"
-            className="input"
+            className="input w-full"
             id="confirmPassword"
             {...register("confirmPassword")}
           />

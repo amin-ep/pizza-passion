@@ -11,10 +11,10 @@ function CartList({ items }) {
     <ul className="flex flex-col gap-4">
       {items.map((item) => (
         <li
-          className="grid grid-cols-[150px_1fr] gap-3 border border-primary-900 py-6 px-4"
+          className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 border border-primary-900 py-6 px-4"
           key={item._id}
         >
-          <div className="grid grid-cols-1 grid-rows-[130px_1fr] gap-8">
+          <div className="grid grid-cols-1 grid-rows-[300px_1fr] sm:grid-rows-[150px_1fr] gap-8">
             <div className="relative">
               <Link href={`/menu/${item.pizza._id}`}>
                 <Image

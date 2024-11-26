@@ -8,7 +8,9 @@ function AccessTab({ children }) {
   return (
     <div className="w-full bg-primary-900 rounded-sm py-8 px-8 flex flex-col gap-7">
       <header className="text-center">
-        <h1 className="text-5xl">Authentication</h1>
+        <h1 className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+          Authentication
+        </h1>
       </header>
       <Tabs className="w-full">
         <TabList className="w-full flex justify-between gap-3">
