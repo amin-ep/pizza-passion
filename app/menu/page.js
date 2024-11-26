@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import PizzaList from "../_components/PizzaList";
-import Loader from "../_components/Loader";
 import Filter from "../_components/Filter";
+import Loader from "../_components/Loader";
+import PizzaList from "../_components/PizzaList";
 
 export const revalidate = 3600;
 
@@ -11,6 +11,8 @@ export const metadata = {
 
 export default function Page({ searchParams }) {
   const filter = searchParams?.finalPrice ?? "all";
+  const page = searchParams?.page ?? 1;
+
   return (
     <div>
       <h1 className="text-3xl sm:text-4xl mb-5 text-accent-400 font-medium">
@@ -30,7 +32,7 @@ export default function Page({ searchParams }) {
         <Filter />
       </div>
       <Suspense fallback={<Loader />} key={filter}>
-        <PizzaList filter={filter} />
+        <PizzaList filter={filter} page={page} />
       </Suspense>
     </div>
   );

@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.API_BASE_URL;
 
-export async function getAllPizzas() {
+export async function getAllPizzas(page = 1) {
   try {
-    const response = await axios.get(`${BASE_URL}/pizza`, {
+    const response = await axios.get(`${BASE_URL}/pizza?page=${page}`, {
       headers: {
         "Content-Type": "application/json",
       },
