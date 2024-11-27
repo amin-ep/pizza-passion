@@ -10,23 +10,14 @@ async function page({ params }) {
     <div>
       <form className="flex flex-col gap-4 pb-4" action={updateOrder}>
         <input type="hidden" value={orderId} name="orderId" />
-        <FormControl label="Phone number" id="phone" variation="col">
-          <input
-            type="tel"
-            name="phone"
-            id="phone"
-            className="input"
-            defaultValue={order.data.doc?.phone}
-          />
-        </FormControl>
         <div className="grid grid-cols-2 gap-4">
-          <FormControl label="Street" id="street" variation="col">
+          <FormControl label="Phone number" id="phone" variation="col">
             <input
-              type="text"
-              name="street"
-              id="street"
+              type="tel"
+              name="phone"
+              id="phone"
               className="input"
-              defaultValue={order.data.doc?.address.street}
+              defaultValue={order.data.doc?.phone}
             />
           </FormControl>
           <FormControl label="Postal Code" id="postal-code" variation="col">

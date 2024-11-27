@@ -304,3 +304,43 @@ export async function ratePizzaById(id, rate) {
     return err.response.data.message;
   }
 }
+
+export async function createOrder(formData) {
+  const paymentMethod = formData.get("payment-method");
+
+  const orderPayload = {
+    cart: formData.get("cart"),
+    customer: formData.get("customer"),
+    phone: formData.get("phone"),
+    address: {
+      postalCode: formData.get("postal-code"),
+      text: formData.get("address"),
+    },
+    text: formData.get("text"),
+    isPaid: paymentMethod === "online" ? true : false,
+  };
+
+  const token = cookies().get(process.env.JWT_SECRET)?.value;
+
+  if (!token) {
+    throw new Error("You must be logged in");
+  }
+
+  const res = await axios.post(
+    `${process.env.API_BASE_URL}/order`,
+    orderPayload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (res.data.status === "success") {
+    revalidatePath(`/payment/${paymentMethod}`);
+    redirect("/success");
+  }
+
+  console.log(res.data);
+}

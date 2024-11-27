@@ -5,6 +5,7 @@ import LinkButton from "../_components/LinkButton";
 import Image from "next/image";
 import { deleteCart } from "../_lib/actions";
 import DeleteCartButton from "../_components/DeleteCartButton";
+import CartOrderingButton from "../_components/CartOrderButton";
 
 export const metadata = {
   title: "Cart",
@@ -46,7 +47,7 @@ async function Page() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] mt-10 gap-4">
             <CartList items={cart.data.cart.cartItems} />
-            <div className="border border-primary-900 h-fit lg:sticky top-4 flex flex-col gap-7 py-4 px-5">
+            <div className="border border-primary-900 h-fit lg:sticky top-4 flex flex-col gap-7 py-4 px-5  max-w-96">
               <div className="flex items-center justify-between text-primary-300">
                 <p>Number of products</p>
                 <span>{cart.data.cart.cartItems.length}</span>
@@ -59,7 +60,7 @@ async function Page() {
                 <p>Cart Total Price</p>
                 <span>${cart.data.cart.totalPrice}</span>
               </div>
-              <LinkButton href="/">Order Now</LinkButton>
+              <CartOrderingButton />
             </div>
           </div>
         </>

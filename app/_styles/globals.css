@@ -45,13 +45,18 @@ label {
     -webkit-user-select: none;
 }
 
+.input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 @layer components {
     .btn {
         @apply bg-accent-500 outline-none px-5 py-3 text-primary-800 font-semibold hover:bg-accent-600 text-center flex items-center justify-center transition-all disabled:cursor-not-allowed
     }
 
     .input {
-        @apply px-5 py-3 text-primary-950 focus:text-primary-50 text-lg bg-primary-300 outline-none focus:bg-primary-500 w-full shadow-sm
+        @apply px-5 py-3 text-primary-950 placeholder:text-primary-600/95 focus:placeholder:text-primary-200 focus:text-primary-50 text-lg bg-primary-300 outline-none focus:bg-primary-500 w-full shadow-sm
     }
 
     .spinner-mini {

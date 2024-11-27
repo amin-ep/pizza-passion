@@ -12,7 +12,7 @@ export async function getCart() {
       },
     });
 
-    return res?.data;
+    return res.data;
   } catch (err) {
     return err.response.data.message;
   }

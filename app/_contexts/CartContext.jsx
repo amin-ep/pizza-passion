@@ -9,10 +9,11 @@ import {
 } from "../_lib/actions";
 
 const initialState = {
-  status: "idle",
+  status: "",
   cartItems: [],
   cartTotalQuantity: 0,
   cartTotalPrice: 0,
+  cartId: "",
 };
 
 const reducer = (state, action) => {
@@ -30,7 +31,11 @@ const reducer = (state, action) => {
       return { ...state, status: "deleting" };
 
     case "cartItems":
-      return { ...state, cartItems: action.payload };
+      return {
+        ...state,
+        cartItems: action.payload.items,
+        cartId: action.payload.id,
+      };
 
     case "delete":
       return {
@@ -59,7 +64,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         cartTotalQuantity: state.cartTotalQuantity - 1,
-        cartItems: action.payload,
+        cartTotalPrice: state.cartTotalPrice - action.payload.removedPrice,
+        cartItems: action.payload.cartItems,
       };
     }
 
@@ -71,61 +77,72 @@ const reducer = (state, action) => {
 const CartContext = createContext();
 
 function CartProvider({ children }) {
-  const [{ status, cartItems, cartTotalQuantity, cartTotalPrice }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { status, cartItems, cartTotalQuantity, cartTotalPrice, cartId },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   useEffect(() => {
     (async () => {
-      try {
-        dispatch({
-          type: "loading",
+      await getCart()
+        .then((res) => {
+          dispatch({
+            type: "loading",
+          });
+          dispatch({
+            type: "totalData",
+            payload: {
+              totalQuantity: res.data.cart.totalQuantity,
+              totalPrice: res.data.cart.totalPrice,
+            },
+          });
+          dispatch({
+            type: "cartItems",
+            payload: {
+              items: res?.data.cart.cartItems,
+              id: res.data.cart._id,
+            },
+          });
+        })
+        .catch(() => {
+          dispatch({
+            type: "totalData",
+            payload: {
+              totalQuantity: 0,
+              totalPrice: 0,
+            },
+          });
+        })
+        .finally(() => {
+          dispatch({
+            type: "idle",
+          });
         });
-        const cart = await getCart();
-        dispatch({
-          type: "totalData",
-          payload: {
-            totalQuantity: cart.data.cart.totalQuantity,
-            totalPrice: cart.data.cart.totalPrice,
-          },
-        });
-        dispatch({
-          type: "cartItems",
-          payload: cart?.data.cart.cartItems,
-        });
-      } catch (err) {
-        dispatch({
-          type: "totalData",
-          payload: 0,
-        });
-      } finally {
-        dispatch({
-          type: "idle",
-        });
-      }
     })();
   }, []);
 
   const handleAddItemToCart = async (pizzaId) => {
     let updatedCartItems = cartItems;
-    const result = await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] });
-    const addedPizza = result?.data?.cart?.cartItems.find(
-      (el) => el.pizza._id === pizzaId
-    );
-    const addedPizzaIndex = updatedCartItems.findIndex(
-      (el) => el._id === addedPizza?._id
-    );
+    await addPizzaToCart({ cartItems: [{ pizza: pizzaId }] }).then((res) => {
+      const addedPizza = res?.data?.cart?.cartItems.find(
+        (el) => el.pizza._id === pizzaId
+      );
+      const addedPizzaIndex = updatedCartItems.findIndex(
+        (el) => el._id === addedPizza?._id
+      );
 
-    if (addedPizzaIndex === -1) {
-      updatedCartItems = [...updatedCartItems, addedPizza];
-    } else {
-      updatedCartItems[addedPizzaIndex].quantity += 1;
-    }
-    dispatch({
-      type: "add",
-      payload: {
-        cartItems: updatedCartItems,
-        addedItemPrice: addedPizza?.pizza?.finalPrice,
-      },
+      if (addedPizzaIndex === -1) {
+        updatedCartItems = [...updatedCartItems, addedPizza];
+      } else {
+        updatedCartItems[addedPizzaIndex].quantity += 1;
+      }
+      dispatch({
+        type: "add",
+        payload: {
+          cartItems: updatedCartItems,
+          addedItemPrice: addedPizza?.pizza?.finalPrice,
+        },
+      });
     });
   };
 
@@ -146,7 +163,10 @@ function CartProvider({ children }) {
 
       dispatch({
         type: "remove",
-        payload: updatedCartItems,
+        payload: {
+          cartItems: updatedCartItems,
+          removedPrice: targetItem.pizza.finalPrice,
+        },
       });
     });
   };
@@ -169,6 +189,12 @@ function CartProvider({ children }) {
     }
   };
 
+  const handleOrderCart = () => {
+    dispatch({
+      type: "delete",
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -179,6 +205,8 @@ function CartProvider({ children }) {
         addToCart: handleAddItemToCart,
         removeFromCart: handleRemovePizza,
         deleteCartById: handleDeleteCart,
+        orderCart: handleOrderCart,
+        cartId: cartId,
       }}
     >
       {children}
