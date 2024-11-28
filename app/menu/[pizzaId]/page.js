@@ -137,7 +137,7 @@ async function Page({ params }) {
               <HiStar className="text-yellow-500" />
 
               <p className="text-primary-50">
-                {pizza.ratingsAverage ?? "Not rated yet"}
+                {pizza.ratingsAverage.toFixed(1) ?? "Not rated yet"}
               </p>
             </div>
           </div>

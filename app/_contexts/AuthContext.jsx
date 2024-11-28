@@ -1,13 +1,13 @@
 "use client";
 
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { toast } from "react-toastify";
 import {
-  createContext,
-  useReducer,
-  useContext,
-  useEffect,
-  useCallback,
-} from "react";
-import { getMe, loginAction } from "../_lib/actions";
+  getMe,
+  loginAction,
+  signOutAction,
+  signupAction,
+} from "../_lib/actions";
 import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
@@ -42,51 +42,83 @@ const AuthProvider = ({ children }) => {
     reducer,
     initialState
   );
+
   const router = useRouter();
 
   const login = async (data) => {
     const res = await loginAction(data);
+
     if (res.status === "success") {
       dispatch({
         type: "signin",
-        payload: data,
+        payload: res.data.user,
       });
       router.push("/menu");
     } else {
-      console.log(res);
+      toast.error(res);
+    }
+  };
+
+  const signup = async (data) => {
+    const res = await signupAction(data);
+
+    if (res?.status === "success") {
+      dispatch({
+        type: "signin",
+        payload: res?.data.user,
+      });
+      router.push("/menu");
+    } else {
+      return res;
     }
   };
 
   useEffect(() => {
     (async () => {
-      try {
-        dispatch({
-          type: "loading",
-        });
-        const userData = await getMe();
+      await getMe()
+        .then((res) => {
+          dispatch({
+            type: "loading",
+          });
 
-        if (userData) {
+          if (res.status === "success") {
+            dispatch({
+              type: "signin",
+              payload: res.data.user,
+            });
+          } else {
+            dispatch({
+              type: "logout",
+            });
+          }
+        })
+        .finally(() => {
           dispatch({
-            type: "signin",
-            payload: userData.data.user,
+            type: "idle",
           });
-        } else {
-          dispatch({
-            type: "logout",
-          });
-        }
-      } catch (err) {
-        return err;
-      } finally {
-        dispatch({
-          type: "idle",
         });
-      }
     })();
   }, []);
 
+  const handleLogout = async () => {
+    await signOutAction().then(() => {
+      dispatch({
+        type: "logout",
+      });
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userData, login, status }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        userData,
+        login,
+        status,
+        logout: handleLogout,
+        signup,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -102,4 +134,4 @@ const useAuth = () => {
   return context;
 };
 
-export { useAuth, AuthProvider };
+export { AuthProvider, useAuth };

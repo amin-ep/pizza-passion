@@ -1,35 +1,13 @@
-import { cookies } from "next/headers";
-import axios from "axios";
-import CartList from "../_components/CartList";
-import LinkButton from "../_components/LinkButton";
 import Image from "next/image";
-import { deleteCart } from "../_lib/actions";
-import DeleteCartButton from "../_components/DeleteCartButton";
+import CartList from "../_components/CartList";
 import CartOrderingButton from "../_components/CartOrderButton";
+import DeleteCartButton from "../_components/DeleteCartButton";
+import LinkButton from "../_components/LinkButton";
+import { getCart } from "../_services/cart-api";
 
 export const metadata = {
   title: "Cart",
 };
-
-async function getCart() {
-  try {
-    const token = cookies().get(process.env.JWT_SECRET)?.value;
-
-    if (!token) {
-      throw new Error("You must be logged in");
-    }
-    const res = await axios.get(`${process.env.API_BASE_URL}/cart/myCart`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    return res?.data;
-  } catch (err) {
-    return err.response.data.message;
-  }
-}
 
 async function Page() {
   const cart = await getCart();
@@ -75,7 +53,7 @@ async function Page() {
           <h1 className="text-xl md:text-2xl lg:text-3xl">
             Your cart is empty
           </h1>
-          <LinkButton href="/menu">Click To Order</LinkButton>
+          <LinkButton href="/menu">Click To Add Some</LinkButton>
         </div>
       )}
     </div>

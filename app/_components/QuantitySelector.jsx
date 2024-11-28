@@ -1,13 +1,18 @@
 "use client";
 
-import { useTransition } from "react";
+import { useCallback, useTransition } from "react";
 import { useCart } from "../_contexts/CartContext";
 import LinkButton from "./LinkButton";
 import SpinnerMini from "./SpinnerMini";
+import { useAuth } from "../_contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 function QuantitySelector({ pizzaId }) {
   const { cartItems, addToCart, removeFromCart } = useCart();
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  const { isLoggedIn } = useAuth();
 
   let quantity = 0;
   const itemQuantity = cartItems?.find(
@@ -26,11 +31,15 @@ function QuantitySelector({ pizzaId }) {
     });
   };
 
-  const handleAddToCart = () => {
-    startTransition(() => {
-      addToCart(pizzaId);
-    });
-  };
+  const handleAddToCart = useCallback(() => {
+    if (isLoggedIn) {
+      startTransition(() => {
+        addToCart(pizzaId);
+      });
+    } else {
+      router.push("/access");
+    }
+  }, [addToCart, isLoggedIn, pizzaId, router]);
 
   return (
     <>

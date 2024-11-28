@@ -61,11 +61,10 @@ input[type='number']::-webkit-outer-spin-button {
 
     .spinner-mini {
         margin: 0;
-        width: 20px;
+        width: 22px;
         aspect-ratio: 1;
         border-radius: 50%;
-        border: 2px solid theme("colors.primary.200");
-        border-right-color: transparent;
+        border: 4px solid;
         animation: rotate 1s infinite linear;
         -webkit-animation: rotate 1s infinite linear;
     }

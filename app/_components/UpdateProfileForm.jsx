@@ -11,6 +11,7 @@ function UpdateProfileForm({ data }) {
         <input
           type="text"
           className="input"
+          autoComplete="off"
           id="email"
           defaultValue={data.data.user.email}
           name="email"
@@ -20,6 +21,7 @@ function UpdateProfileForm({ data }) {
         <input
           type="text"
           className="input"
+          autoComplete="off"
           id="fullName"
           defaultValue={data.data.user.fullName}
           name="fullName"
@@ -29,6 +31,7 @@ function UpdateProfileForm({ data }) {
         <input
           type="tel"
           className="input"
+          autoComplete="off"
           id="phone"
           defaultValue={data.data.user.phone ?? ""}
           name="phone"

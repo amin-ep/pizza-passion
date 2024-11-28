@@ -1,3 +1,6 @@
+import { cookies } from "next/headers";
+import axios from "axios";
+
 export async function getCart() {
   try {
     const token = cookies().get(process.env.JWT_SECRET)?.value;
@@ -12,8 +15,8 @@ export async function getCart() {
       },
     });
 
-    return res.data;
+    return res?.data;
   } catch (err) {
-    return err.response.data.message;
+    return err?.response?.data?.message || "Something went wrong!";
   }
 }

@@ -1,23 +1,67 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { useAuth } from "../_contexts/AuthContext";
 import { useCart } from "../_contexts/CartContext";
 import { createOrder } from "../_lib/actions";
 import FormControl from "./FormControl";
+import LinkButton from "./LinkButton";
+import PaymentOrderFields from "./PaymentOrderFields";
 import SpinnerMini from "./SpinnerMini";
-import SubmitButton from "./SubmitButton";
 
 function OnlinePaymentForm() {
   // this is a demo functionality just for ordering products and this will not work just like a payment stripe
+  const [isPending, startTransition] = useTransition();
+
+  const cardNumberInputRefs = useRef([]);
+
+  const handleCardNumberInputChange = (e, index) => {
+    const { value } = e.target;
+    if (value.length === 4 && index < cardNumberInputRefs.current.length - 1) {
+      cardNumberInputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !e.target.value && index > 0) {
+      cardNumberInputRefs.current[index - 1].focus();
+    }
+  };
 
   const { cartId, cartTotalPrice, cartTotalQuantity, orderCart } = useCart();
   const { userData } = useAuth();
 
-  const { register } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  useEffect(() => {
+    if (cartId && userData._id)
+      reset({
+        cart: cartId || "",
+        customer: userData._id,
+        isPaid: true,
+      });
+  }, [cartId, userData._id, reset]);
+
+  const onSubmit = async (data) => {
+    data.address = {
+      text: data.address,
+      postalCode: data.postalCode,
+    };
+    delete data.postalCode;
+
+    startTransition(() => {
+      createOrder(data).then((res) => {
+        orderCart();
+      });
+    });
+  };
 
   return (
     <div className="w-full flex flex-col gap-5">
@@ -39,31 +83,25 @@ function OnlinePaymentForm() {
           </div>
         </div>
       </div>
-      <form className="grid grid-cols-1 gap-3" action={createOrder}>
+      <form
+        className="grid grid-cols-1 gap-3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="grid grid-cols-1 gap-3">
           <FormControl id="card-number" label="Card Number*">
             <div className="flex flex-row gap-1 md:gap-3">
-              <input
-                type="number"
-                className="input px-0 text-center"
-                {...register("card-number-1")}
-                id="card-number"
-              />
-              <input
-                type="number"
-                className="input px-0 text-center"
-                {...register("card-number-2")}
-              />
-              <input
-                type="number"
-                className="input px-0 text-center"
-                {...register("card-number-3")}
-              />
-              <input
-                type="number"
-                className="input px-0 text-center"
-                {...register("card-number-4")}
-              />
+              {[0, 1, 2, 3].map((_, index) => (
+                <input
+                  key={index}
+                  type="number"
+                  className="input px-0 text-center"
+                  maxLength="4"
+                  id="card-number"
+                  ref={(el) => (cardNumberInputRefs.current[index] = el)}
+                  onChange={(e) => handleCardNumberInputChange(e, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                />
+              ))}
             </div>
           </FormControl>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-1 md:gap-3">
@@ -92,48 +130,11 @@ function OnlinePaymentForm() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input type="hidden" name="cart" value={cartId || ""} />
-          <input type="hidden" name="customer" value={userData._id || ""} />
-          <input type="hidden" name="payment-method" value="online" />
-          <FormControl id="phone" label="Phone number*">
-            <input
-              type="tel"
-              id="phone"
-              {...register("phone", {
-                required: {
-                  value: true,
-                },
-              })}
-              className="input"
-            />
-          </FormControl>
-          <FormControl id="postal-code" label="Postal Code*">
-            <input
-              type="tel"
-              id="postal-code"
-              {...register("postal-code", {
-                required: {
-                  value: true,
-                },
-              })}
-              className="input"
-            />
-          </FormControl>
-        </div>
-        <FormControl id="address" label="Address*">
-          <textarea
-            className="input resize-none h-36"
-            {...register("address")}
-          />
-        </FormControl>
-        <FormControl id="text" label="Any Description for your order">
-          <textarea className="input resize-none h-36" {...register("text")} />
-        </FormControl>
+        <PaymentOrderFields errors={errors} register={register} />
         <div>
-          <SubmitButton pendingLabel={<SpinnerMini />} onClick={orderCart}>
-            Pay ${cartTotalPrice} and order
-          </SubmitButton>
+          <LinkButton type="submit">
+            {isPending ? <SpinnerMini /> : "Order cart"}
+          </LinkButton>
         </div>
       </form>
     </div>

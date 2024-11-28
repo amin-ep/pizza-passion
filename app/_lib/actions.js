@@ -1,12 +1,11 @@
 "use server";
 
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { signup } from "../_services/auth-api";
+import { redirect } from "next/navigation";
 import { JWT_EXPIRES } from "../_utils/constants";
 import { signIn, signOut } from "./auth";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function signInAction() {
   await signIn("google", {
@@ -20,12 +19,34 @@ export async function signOutAction() {
 }
 
 export async function signupAction(payload) {
-  const token = (await signup(payload))?.data?.token;
-  cookies().set({
-    name: process.env.JWT_SECRET,
-    value: token,
-    expires: JWT_EXPIRES,
-  });
+  try {
+    const response = await axios.post(
+      `${process.env.API_BASE_URL}/auth/signup`,
+      { ...payload, google: false },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response?.data?.status === "success") {
+      const token = response?.data.token;
+      cookies().set({
+        name: process.env.JWT_SECRET,
+        value: token,
+        expires: JWT_EXPIRES,
+      });
+    }
+
+    return response?.data;
+  } catch (err) {
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
+  }
 }
 
 export async function loginAction(payload) {
@@ -43,7 +64,7 @@ export async function loginAction(payload) {
       }
     );
 
-    if (response.data.status === "success") {
+    if (response?.data?.status === "success") {
       const token = response?.data.token;
       cookies().set({
         name: process.env.JWT_SECRET,
@@ -52,9 +73,13 @@ export async function loginAction(payload) {
       });
     }
 
-    return response.data;
+    return response?.data;
   } catch (err) {
-    return err.response.data;
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
   }
 }
 
@@ -76,8 +101,12 @@ export async function getMe() {
     });
 
     return response.data;
-  } catch {
-    return err.response.data.message;
+  } catch (err) {
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
   }
 }
 
@@ -177,14 +206,12 @@ export async function updateOrder(formData) {
     }
   );
 
-  if (res.data.status === "success") {
+  if (res?.data.status === "success") {
     revalidatePath(`/account/orders/edit/${id}`);
     revalidatePath("/account/orders");
 
     redirect("/account/orders");
   }
-
-  return res.data;
 }
 
 export async function addPizzaToCart(payload) {
@@ -229,9 +256,7 @@ export async function removePizzaFromCart(id) {
     revalidatePath("/cart");
 
     return res.data;
-  } catch (err) {
-    console.log(err.response.data);
-  }
+  } catch (err) {}
 }
 
 export async function deleteCart(id) {
@@ -253,7 +278,11 @@ export async function deleteCart(id) {
 
     return res.data;
   } catch (err) {
-    return err.response.data.message;
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
   }
 }
 export async function getCart() {
@@ -273,12 +302,15 @@ export async function getCart() {
     if (res.data.status === "success") return res.data;
     if (res.data.status === "fail") return "your cart is empty";
   } catch (err) {
-    return err.response.data.message;
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
   }
 }
 
 export async function ratePizzaById(id, rate) {
-  console.log(id, rate);
   try {
     const token = cookies().get(process.env.JWT_SECRET)?.value;
 
@@ -301,46 +333,34 @@ export async function ratePizzaById(id, rate) {
 
     return res.data;
   } catch (err) {
-    return err.response.data.message;
+    if (err.response) {
+      return err.response.data.message || "An error occurred!";
+    } else if (err.request) {
+      return "No response from the server!";
+    }
   }
 }
 
-export async function createOrder(formData) {
-  const paymentMethod = formData.get("payment-method");
-
-  const orderPayload = {
-    cart: formData.get("cart"),
-    customer: formData.get("customer"),
-    phone: formData.get("phone"),
-    address: {
-      postalCode: formData.get("postal-code"),
-      text: formData.get("address"),
-    },
-    text: formData.get("text"),
-    isPaid: paymentMethod === "online" ? true : false,
-  };
-
+export async function createOrder(payload) {
   const token = cookies().get(process.env.JWT_SECRET)?.value;
 
   if (!token) {
     throw new Error("You must be logged in");
   }
 
-  const res = await axios.post(
-    `${process.env.API_BASE_URL}/order`,
-    orderPayload,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await axios.post(`${process.env.API_BASE_URL}/order`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
 
-  if (res.data.status === "success") {
-    revalidatePath(`/payment/${paymentMethod}`);
+  if (res?.data.status === "success") {
+    revalidatePath(
+      `/payment/${payload.isPaid === true ? "online" : "offline"}`
+    );
     redirect("/success");
   }
 
-  console.log(res.data);
+  return res?.data;
 }

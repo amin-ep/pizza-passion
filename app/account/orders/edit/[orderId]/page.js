@@ -15,6 +15,7 @@ async function page({ params }) {
             <input
               type="tel"
               name="phone"
+              autoComplete="off"
               id="phone"
               className="input"
               defaultValue={order.data.doc?.phone}
@@ -22,8 +23,9 @@ async function page({ params }) {
           </FormControl>
           <FormControl label="Postal Code" id="postal-code" variation="col">
             <input
-              type="text"
+              type="number"
               name="postalCode"
+              autoComplete="off"
               id="postal-code"
               className="input"
               defaultValue={order.data.doc?.address.postalCode}
@@ -38,6 +40,7 @@ async function page({ params }) {
           <textarea
             name="addressText"
             id="address-text"
+            autoComplete="off"
             className="input resize-none h-36"
             defaultValue={order.data.doc.address.text}
           />
@@ -46,6 +49,7 @@ async function page({ params }) {
           <textarea
             name="text"
             id="text"
+            autoComplete="off"
             className="input resize-none h-36"
             defaultValue={order.data.doc.text}
           />

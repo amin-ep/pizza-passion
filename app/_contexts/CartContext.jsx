@@ -7,6 +7,7 @@ import {
   getCart,
   removePizzaFromCart,
 } from "../_lib/actions";
+import { useAuth } from "./AuthContext";
 
 const initialState = {
   status: "",
@@ -39,10 +40,7 @@ const reducer = (state, action) => {
 
     case "delete":
       return {
-        ...state,
-        cartItems: [],
-        cartTotalPrice: 0,
-        cartTotalQuantity: 0,
+        ...initialState,
       };
 
     case "add":
@@ -81,45 +79,52 @@ function CartProvider({ children }) {
     { status, cartItems, cartTotalQuantity, cartTotalPrice, cartId },
     dispatch,
   ] = useReducer(reducer, initialState);
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    (async () => {
-      await getCart()
-        .then((res) => {
-          dispatch({
-            type: "loading",
+    if (isLoggedIn) {
+      (async () => {
+        await getCart()
+          .then((res) => {
+            dispatch({
+              type: "loading",
+            });
+            dispatch({
+              type: "totalData",
+              payload: {
+                totalQuantity: res.data.cart.totalQuantity,
+                totalPrice: res.data.cart.totalPrice,
+              },
+            });
+            dispatch({
+              type: "cartItems",
+              payload: {
+                items: res?.data.cart.cartItems,
+                id: res?.data.cart._id,
+              },
+            });
+          })
+          .catch(() => {
+            dispatch({
+              type: "totalData",
+              payload: {
+                totalQuantity: 0,
+                totalPrice: 0,
+              },
+            });
+          })
+          .finally(() => {
+            dispatch({
+              type: "idle",
+            });
           });
-          dispatch({
-            type: "totalData",
-            payload: {
-              totalQuantity: res.data.cart.totalQuantity,
-              totalPrice: res.data.cart.totalPrice,
-            },
-          });
-          dispatch({
-            type: "cartItems",
-            payload: {
-              items: res?.data.cart.cartItems,
-              id: res.data.cart._id,
-            },
-          });
-        })
-        .catch(() => {
-          dispatch({
-            type: "totalData",
-            payload: {
-              totalQuantity: 0,
-              totalPrice: 0,
-            },
-          });
-        })
-        .finally(() => {
-          dispatch({
-            type: "idle",
-          });
-        });
-    })();
-  }, []);
+      })();
+    } else {
+      dispatch({
+        type: "delete",
+      });
+    }
+  }, [isLoggedIn]);
 
   const handleAddItemToCart = async (pizzaId) => {
     let updatedCartItems = cartItems;

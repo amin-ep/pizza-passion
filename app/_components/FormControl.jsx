@@ -6,6 +6,7 @@ export default function FormControl({
   variation = "col",
   id,
   label,
+  error,
 }) {
   return (
     <div className={`flex flex-${variation} ${classNames} gap-2`}>
@@ -15,6 +16,7 @@ export default function FormControl({
         </label>
       )}
       {children}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

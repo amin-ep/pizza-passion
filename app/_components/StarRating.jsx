@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { HiOutlineStar } from "react-icons/hi2";
 import { ratePizzaById } from "../_lib/actions";
 import { useAuth } from "../_contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 function StarRating({ maxRating = 5, pizzaId, pizzaRatings }) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
   const [userHasRated, setUserHasRated] = useState(false);
+  const router = useRouter();
 
-  const { userData, status } = useAuth();
+  const { userData, status, isLoggedIn } = useAuth();
 
   useEffect(() => {
     const userDataInRatings = pizzaRatings.find(
@@ -30,8 +32,12 @@ function StarRating({ maxRating = 5, pizzaId, pizzaRatings }) {
   }, [userData, status, pizzaRatings, userHasRated]);
 
   const handleRate = async (rating) => {
-    setRating(rating);
-    await ratePizzaById(pizzaId, rating);
+    if (isLoggedIn) {
+      setRating(rating);
+      await ratePizzaById(pizzaId, rating);
+    } else {
+      router.push("/access");
+    }
   };
 
   return (
