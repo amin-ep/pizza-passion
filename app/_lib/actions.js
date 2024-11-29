@@ -182,7 +182,6 @@ export async function updateOrder(formData) {
   }
 
   const address = {
-    street: formData.get("street"),
     postalCode: formData.get("postalCode"),
     text: formData.get("addressText"),
   };
@@ -192,6 +191,12 @@ export async function updateOrder(formData) {
     address,
     text: formData.get("text"),
   };
+
+  for (const [key, value] of Object.entries(updateData)) {
+    if (value.length < 1) {
+      delete updateData[key];
+    }
+  }
 
   const id = formData.get("orderId");
 

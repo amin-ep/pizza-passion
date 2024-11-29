@@ -8,7 +8,6 @@ export const metadata = {
 
 async function Page() {
   const orders = await getAllOrders();
-  console.log(orders.data);
 
   return (
     <div className="flex flex-col gap-3">

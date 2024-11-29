@@ -55,6 +55,9 @@ function OnlinePaymentForm() {
       postalCode: data.postalCode,
     };
     delete data.postalCode;
+    if (data.text.length < 1) {
+      delete data.text;
+    }
 
     startTransition(() => {
       createOrder(data).then((res) => {

@@ -49,6 +49,7 @@ const reducer = (state, action) => {
         cartItems: action.payload.cartItems,
         cartTotalQuantity: state.cartTotalQuantity + 1,
         cartTotalPrice: state.cartTotalPrice + action.payload.addedItemPrice,
+        cartId: action.payload.cartId,
       };
 
     case "totalData":
@@ -146,6 +147,7 @@ function CartProvider({ children }) {
         payload: {
           cartItems: updatedCartItems,
           addedItemPrice: addedPizza?.pizza?.finalPrice,
+          cartId: res?.data?.cart?._id,
         },
       });
     });

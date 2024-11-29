@@ -6,8 +6,6 @@ import PizzaCard from "./PizzaCard";
 async function PizzaList({ filter, page }) {
   const pizzas = await getAllPizzas(page);
 
-  if (!pizzas.data.data.docs.length) return null;
-
   let displayPizzas;
 
   if (filter === "all") {
@@ -28,6 +26,8 @@ async function PizzaList({ filter, page }) {
       (pizza) => pizza?.finalPrice > 60
     );
   }
+
+  if (!pizzas?.data?.data?.docs?.length) return null;
 
   return (
     <>

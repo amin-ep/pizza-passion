@@ -6,6 +6,7 @@ import { getOrderById } from "@/app/_services/order-api";
 async function page({ params }) {
   const { orderId } = params;
   const order = await getOrderById(orderId);
+
   return (
     <div>
       <form className="flex flex-col gap-4 pb-4" action={updateOrder}>
@@ -18,7 +19,7 @@ async function page({ params }) {
               autoComplete="off"
               id="phone"
               className="input"
-              defaultValue={order.data.doc?.phone}
+              defaultValue={order?.data.doc?.phone}
             />
           </FormControl>
           <FormControl label="Postal Code" id="postal-code" variation="col">
@@ -28,7 +29,7 @@ async function page({ params }) {
               autoComplete="off"
               id="postal-code"
               className="input"
-              defaultValue={order.data.doc?.address.postalCode}
+              defaultValue={order?.data.doc?.address.postalCode}
             />
           </FormControl>
         </div>
@@ -42,7 +43,7 @@ async function page({ params }) {
             id="address-text"
             autoComplete="off"
             className="input resize-none h-36"
-            defaultValue={order.data.doc.address.text}
+            defaultValue={order?.data.doc.address.text}
           />
         </FormControl>
         <FormControl label="Text" id="text" variation="col">
@@ -51,7 +52,7 @@ async function page({ params }) {
             id="text"
             autoComplete="off"
             className="input resize-none h-36"
-            defaultValue={order.data.doc.text}
+            defaultValue={order?.data.doc.text}
           />
         </FormControl>
         <div className="flex justify-end">

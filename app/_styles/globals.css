@@ -59,6 +59,16 @@ input[type='number']::-webkit-outer-spin-button {
         @apply px-5 py-3 text-primary-950 placeholder:text-primary-600/95 focus:placeholder:text-primary-200 focus:text-primary-50 text-lg bg-primary-300 outline-none focus:bg-primary-500 w-full shadow-sm
     }
 
+    .fixed-header {
+       position: fixed;
+       background-color: theme(colors.primary.950);
+       z-index: 6;
+       right: 0;
+       left: 0;
+       top:0;
+       animation: slideDown 400ms;
+    }
+
     .spinner-mini {
         margin: 0;
         width: 22px;
@@ -72,6 +82,14 @@ input[type='number']::-webkit-outer-spin-button {
     @keyframes rotate {
         to {
             transform: rotate(1turn);
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-110px);
+        } to {
+            transform: translateY(0);
         }
     }
 }
