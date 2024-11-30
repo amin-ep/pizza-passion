@@ -37,7 +37,9 @@ export default function RootLayout({ children }) {
               <Navigation />
             </Header>
             <div className="flex-1 px-8 py-12 grid">
-              <main className="max-w-7xl mx-auto w-full">{children}</main>
+              <main className="max-w-7xl mx-auto w-full overflow-hidden">
+                {children}
+              </main>
             </div>
           </CartProvider>
         </AuthProvider>

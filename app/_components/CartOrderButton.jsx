@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { HiMiniComputerDesktop } from "react-icons/hi2";
 import { useCart } from "../_contexts/CartContext";
@@ -9,7 +9,7 @@ function CartOrderingButton() {
   const [payingMethod, setPayingMethod] = useState("online");
   const { cartTotalPrice } = useCart();
 
-  const handlePaymentMethod = () => {
+  const handlePaymentMethod = useCallback(() => {
     switch (payingMethod) {
       case "online": {
         return setPayingMethod("offline");
@@ -19,7 +19,7 @@ function CartOrderingButton() {
         return setPayingMethod("online");
       }
     }
-  };
+  }, [payingMethod]);
 
   return (
     <div className="grid grid-cols-1 gap-3 items-center">

@@ -79,6 +79,19 @@ input[type='number']::-webkit-outer-spin-button {
         -webkit-animation: rotate 1s infinite linear;
     }
 
+    .animate-bottom-nav {
+    animation: slideUp 0.7s;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(110px);
+        } to {
+            transform: translateY(0);
+
+        }
+    }
+
     @keyframes rotate {
         to {
             transform: rotate(1turn);

@@ -16,16 +16,19 @@ const navLinks = [
     name: "Home",
     href: "/account",
     icon: <HiHome className="h-5 w-5 text-primary-600" />,
+    activeIcon: <HiHome className="h-5 w-5 text-accent-500" />,
   },
   {
     name: "Orders",
     href: "/account/orders",
     icon: <HiCalendarDays className="h-5 w-5 text-primary-600" />,
+    activeIcon: <HiCalendarDays className="h-5 w-5 text-accent-500" />,
   },
   {
     name: "Profile",
     href: "/account/profile",
     icon: <HiMiniUser className="h-5 w-5 text-primary-600" />,
+    activeIcon: <HiMiniUser className="h-5 w-5 text-accent-500" />,
   },
 ];
 
@@ -34,7 +37,7 @@ function BottomNavigation() {
   const { logout } = useAuth();
 
   return (
-    <nav className="bg-primary-950 border-t border-primary-900 md:hidden fixed bottom-0 right-0 left-0">
+    <nav className="bg-primary-950 border-t border-primary-900 md:hidden fixed bottom-0 right-0 left-0 animate-bottom-nav">
       <ul className="flex flex-row justify-between sm:justify-evenly items-center px-3">
         {navLinks.map((link) => (
           <li key={link.name}>
@@ -44,15 +47,15 @@ function BottomNavigation() {
               }`}
               href={link.href}
             >
-              {link.icon}
+              {pathname === link.href ? link.activeIcon : link.icon}
               <span>{link.name}</span>
             </Link>
           </li>
         ))}
 
-        <li className="mt-auto">
+        <li>
           <button
-            className="py-3 px-1 transition-colors flex flex-col items-center gap-4 font-semibold text-primary-200"
+            className="py-3 px-1 transition-colors flex flex-col items-center gap-2 font-semibold text-primary-200"
             onClick={() => logout()}
           >
             <HiOutlineArrowRightOnRectangle className="h-5 w-5 text-primary-600" />

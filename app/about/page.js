@@ -4,6 +4,7 @@ import image2 from "@/public/images/about-2.jpg";
 import image3 from "@/public/images/about-3.jpg";
 import image4 from "@/public/images/about-4.jpg";
 import Link from "next/link";
+import AnimatedParagraph from "../_components/AnimatedParagraph";
 
 export const metadata = {
   title: "About",
@@ -17,14 +18,7 @@ export default function Page() {
           Welcome to Pizza Passion
         </h1>
         <div className="space-y-6 lg:space-y-8">
-          <p>
-            Welcome to Pizza Passion, your one-stop solution for satisfying your
-            pizza cravings from the comfort of your home. At Pizza Passion, we
-            believe that good food should be convenient, delicious, and made
-            with the finest ingredients. Whether you&apos;re in the mood for
-            classic flavors or something adventurous, we&apos;ve got the perfect
-            slice for you!
-          </p>
+          <AnimatedParagraph text="Welcome to Pizza Passion, your one-stop solution for satisfying your pizza cravings from the comfort of your home. At Pizza Passion, we believe that good food should be convenient, delicious, and made with the finest ingredients. Whether you're in the mood for classic flavors or something adventurous, we've got the perfect slice for you!" />
         </div>
       </div>
 
@@ -51,13 +45,7 @@ export default function Page() {
           How It Works
         </h1>
         <div className="space-y-6 lg:space-y-8">
-          <p>
-            Ordering your favorite pizza is just a few clicks away! Choose from
-            our range of pizzas, add sides and drinks, and customize your order
-            to suit your taste. Once you&apos;ve placed your order, sit back and
-            relax – we&apos;ll deliver your pizza hot and fresh right to your
-            door. And for your convenience, you can pay upon delivery.
-          </p>
+          <AnimatedParagraph text="Ordering your favorite pizza is just a few clicks away! Choose from our range of pizzas, add sides and drinks, and customize your order to suit your taste. Once you've placed your order, sit back and relax – we'll deliver your pizza hot and fresh right to your door. And for your convenience, you can pay upon delivery." />
         </div>
       </div>
 
@@ -66,14 +54,7 @@ export default function Page() {
           Our Story
         </h1>
         <div className="space-y-6 lg:space-y-8">
-          <p>
-            Pizza Passion started with a simple idea: to make delicious,
-            high-quality pizza accessible to everyone without the hassle. Since
-            our founding, we&apos;ve focused on delivering an exceptional pizza
-            experience, combining fresh ingredients, unique recipes, and a
-            passion for flavor. Join us on this journey and discover your love
-            for pizza all over again!
-          </p>
+          <AnimatedParagraph text="Pizza Passion started with a simple idea: to make delicious, high-quality pizza accessible to everyone without the hassle. Since our founding, we've focused on delivering an exceptional pizza experience, combining fresh ingredients, unique recipes, and a passion for flavor. Join us on this journey and discover your love for pizza all over again!" />
         </div>
       </div>
 
@@ -100,12 +81,7 @@ export default function Page() {
           Our Promise
         </h1>
         <div className="space-y-6 lg:space-y-8">
-          <p>
-            We are committed to bringing you the best pizza experience with
-            every order. From the quality of our ingredients to our fast and
-            reliable delivery, everything we do is focused on your satisfaction.
-            We&apos;re here to make your pizza moments memorable.
-          </p>
+          <AnimatedParagraph text="We are committed to bringing you the best pizza experience with every order. From the quality of our ingredients to our fast and reliable delivery, everything we do is focused on your satisfaction. We're here to make your pizza moments memorable." />
           <div>
             <Link
               href="/menu"

@@ -27,63 +27,6 @@ async function Page({ params }) {
   const ingredients = pizza?.ingredients.join(", ");
 
   return (
-    // <div className="w-full min-h-80 grid grid-cols-1 sm:grid-cols-[300px_1fr] gap-14 border-[1px] border-primary-900">
-    //<div className="relative h-72 sm:h-auto">
-    //     <Image
-    //       src={`http://localhost:8080/static/${pizza.imageUrl}`}
-    //       alt={pizza.name}
-    //       fill
-    //       className="object-cover"
-    //     />
-    //   </div>
-    //   <div className="pt-10 flex flex-col justify-between">
-    //     <div>
-    //       <div className="flex gap-2 items-center">
-    //         <LuPizza size={35} className="text-primary-600" />
-    //         <h1 className="sm:text-3xl">{pizza.name}</h1>
-    //       </div>
-    //       <div className="flex gap-2 items-center">
-    //         <GiHotMeal size={22} className="text-primary-600" />
-    //         <p className="text-xl">
-    //           Ingredients:
-    //           <TextExpander>{ingredients}</TextExpander>
-    //         </p>
-    //       </div>
-    //       <div className="flex gap-2 items-center">
-    //         <TbCashRegister size={27} className="text-primary-600" />
-    //         {pizza.discount > 0 ? (
-    //           <>
-    //             <p className="text-3xl font-semibold text-accent-500">
-    //               ${pizza.finalPrice}
-    //             </p>
-    //             <p className="text-xl line-through">${pizza.unitPrice}</p>
-    //           </>
-    //         ) : (
-    //           <>
-    //             <p className="text-3xl font-semibold text-accent-500">
-    //               ${pizza.finalPrice}
-    //             </p>
-    //           </>
-    //         )}
-    //       </div>
-    //       <div className="flex gap-2 items-center">
-    //         <HiStar size={22} className="text-primary-600" />
-
-    //         <p className="text-xl text-primary-600">
-    //           {pizza.ratingsAverage ?? "Not rated yet"}
-    //         </p>
-    //       </div>
-    //     </div>
-    //     <div className="flex items-center justify-between p-5">
-    //       <StarRating
-    //         maxRating={5}
-    //         pizzaRatings={pizza.ratings}
-    //         pizzaId={pizza._id}
-    //       />
-    //       <QuantitySelector pizzaId={pizzaId} />
-    //     </div>
-    //   </div>
-    // </div>
     <div className="p-3">
       <div className="grid grid-cols-1 sm:grid-cols-[250px_1fr] md:grid-cols-[320px_1fr] border border-primary-800 gap-3">
         <div className="relative aspect-square">

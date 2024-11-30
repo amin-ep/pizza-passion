@@ -31,7 +31,7 @@ function QuantitySelector({ pizzaId }) {
     });
   };
 
-  const handleAddToCart = useCallback(() => {
+  const handleAddToCart = () => {
     if (isLoggedIn) {
       startTransition(() => {
         addToCart(pizzaId);
@@ -39,7 +39,7 @@ function QuantitySelector({ pizzaId }) {
     } else {
       router.push("/access");
     }
-  }, [addToCart, isLoggedIn, pizzaId, router]);
+  };
 
   return (
     <>

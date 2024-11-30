@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 function Filter() {
   const searchParams = useSearchParams();
@@ -18,7 +19,15 @@ function Filter() {
   }
 
   return (
-    <div className="border border-primary-800 flex">
+    <motion.div
+      initial={{ translateX: 550 }}
+      animate={{ translateX: 0 }}
+      transition={{
+        duration: 0.7,
+        delay: 0,
+      }}
+      className="border border-primary-800 flex"
+    >
       <Button
         filter="all"
         activeFilter={activeFilter}
@@ -47,7 +56,7 @@ function Filter() {
       >
         Expensive
       </Button>
-    </div>
+    </motion.div>
   );
 }
 
