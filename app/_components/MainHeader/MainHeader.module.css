@@ -1,0 +1,28 @@
+.fixHeader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.3s;
+  -webkit-animation: slideDown 0.3s;
+}
+/* fixed left-0 right-0 top-0 z-10 backdrop-blur-lg */
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-110px);
+    -webkit-transform: translateY(-110px);
+    -moz-transform: translateY(-110px);
+    -ms-transform: translateY(-110px);
+    -o-transform: translateY(-110px);
+  }
+  to {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+  }
+}

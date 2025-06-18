@@ -1,12 +1,11 @@
 "use client";
 
-import { updateUser } from "../_lib/actions";
 import FormControl from "./FormControl";
 import SubmitButton from "./SubmitButton";
 
 function UpdateProfileForm({ data }) {
   return (
-    <form className="flex flex-col gap-4" action={updateUser}>
+    <form className="flex flex-col gap-4">
       <FormControl id="email" label="Email">
         <input
           type="text"

@@ -1,20 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useAuth } from "../_contexts/AuthContext";
-import { useCart } from "../_contexts/CartContext";
-import { createOrder } from "../_lib/actions";
-import FormControl from "./FormControl";
-import SpinnerMini from "./SpinnerMini";
-import SubmitButton from "./SubmitButton";
 import { useEffect, useTransition } from "react";
-import PaymentOrderFields from "./PaymentOrderFields";
+import { useForm } from "react-hook-form";
+import { createOrder } from "../_lib/actions";
 import LinkButton from "./LinkButton";
+import PaymentOrderFields from "./PaymentOrderFields";
+import SpinnerMini from "./SpinnerMini";
 
 function OfflinePaymentForm() {
   const [isPending, startTransition] = useTransition();
-  const { userData } = useAuth();
-  const { orderCart, cartId } = useCart();
+  // const { userData } = useAuth();
 
   const {
     register,
@@ -23,14 +18,14 @@ function OfflinePaymentForm() {
     reset,
   } = useForm();
 
-  useEffect(() => {
-    if (cartId && userData._id)
-      reset({
-        cart: cartId || "",
-        customer: userData._id,
-        isPaid: false,
-      });
-  }, [cartId, userData._id, reset]);
+  // useEffect(() => {
+  //   if (cartId && userData._id)
+  //     reset({
+  //       cart: cartId || "",
+  //       customer: userData._id,
+  //       isPaid: false,
+  //     });
+  // }, [cartId, userData._id, reset]);
 
   const onSubmit = async (data) => {
     data.address = {
@@ -49,10 +44,10 @@ function OfflinePaymentForm() {
       });
     });
   };
-
+  // !fix me
   return (
     <form
-      className="flex flex-col gap-3 w-full"
+      className="flex w-full flex-col gap-3"
       onSubmit={handleSubmit(onSubmit)}
     >
       <PaymentOrderFields register={register} errors={errors} />

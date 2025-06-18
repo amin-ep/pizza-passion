@@ -1,15 +1,13 @@
 "use client";
 
-import { useCart } from "../_contexts/CartContext";
-
 function OfflinePaymentHeading() {
-  const { cartTotalPrice } = useCart();
+  // !fix me
   return (
     <div className="mb-10">
-      <h1 className="text-3xl md:text-4xl text-accent-600">
+      <h1 className="text-3xl text-accent-600 md:text-4xl">
         Order Your pizzas
       </h1>
-      <p>Fill the inputs below and pay ${cartTotalPrice} at door!</p>
+      <p>Fill the inputs below and pay $0 at door!</p>
     </div>
   );
 }

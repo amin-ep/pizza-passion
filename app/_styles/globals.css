@@ -3,106 +3,113 @@
 @tailwind utilities;
 
 :root {
-    --color-primary-50: "#E1E8EF",
-        --color-primary-100: "#D4DEE7",
-        --color-primary-200: "#B7C7D7",
-        --color-primary-300: "#99B0C7",
-        --color-primary-400: "#7C99B6",
-        --color-primary-500: "#5E82A6",
-        --color-primary-600: "#4C6B8A",
-        --color-primary-700: "#3C546C",
-        --color-primary-800: "#2C3D4F",
-        --color-primary-900: "#1B2631",
-        --color-primary-950: "#141C24",
-
-        --color-accent-50: "#FAF5F0",
-        --color-accent-100: "#F4ECE1",
-        --color-accent-200: "#E8D6BF",
-        --color-accent-300: "#DDC2A2",
-        --color-accent-400: "#D2AF84",
-        --color-accent-500: "#C69963",
-        --color-accent-600: "#B78343",
-        --color-accent-700: "#926835",
-        --color-accent-800: "#6C4D28",
-        --color-accent-900: "#4B351B",
-        --color-accent-950: "#382814",
+  --color-primary-50: "#E1E8EF";
+  --color-primary-100: "#D4DEE7";
+  --color-primary-200: "#B7C7D7";
+  --color-primary-300: "#99B0C7";
+  --color-primary-400: "#7C99B6";
+  --color-primary-500: "#5E82A6";
+  --color-primary-600: "#4C6B8A";
+  --color-primary-700: "#3C546C";
+  --color-primary-800: "#2C3D4F";
+  --color-primary-900: "#1B2631";
+  --color-primary-950: "#141C24";
+  --color-accent-50: "#FAF5F0";
+  --color-accent-100: "#F4ECE1";
+  --color-accent-200: "#E8D6BF";
+  --color-accent-300: "#DDC2A2";
+  --color-accent-400: "#D2AF84";
+  --color-accent-500: "#C69963";
+  --color-accent-600: "#B78343";
+  --color-accent-700: "#926835";
+  --color-accent-800: "#6C4D28";
+  --color-accent-900: "#4B351B";
+  --color-accent-950: "#382814";
 }
-
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-
 body {
-    margin: 0;
+  margin: 0;
 }
 
 label {
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
-.input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @layer components {
-    .btn {
-        @apply bg-accent-500 outline-none px-5 py-3 text-primary-800 font-semibold hover:bg-accent-600 text-center flex items-center justify-center transition-all disabled:cursor-not-allowed
-    }
+  .btn {
+    @apply flex items-center justify-center gap-2 bg-accent-500 px-5 py-3 text-center font-semibold text-primary-800 outline-none transition-all hover:bg-accent-600 disabled:cursor-not-allowed;
+  }
 
-    .input {
-        @apply px-5 py-3 text-primary-950 placeholder:text-primary-600/95 focus:placeholder:text-primary-200 focus:text-primary-50 text-lg bg-primary-300 outline-none focus:bg-primary-500 w-full shadow-sm
-    }
+  .input {
+    @apply w-full bg-primary-300 px-5 py-3 text-lg text-primary-950 shadow-sm outline-none placeholder:text-primary-600/95 focus:bg-primary-500 focus:text-primary-50 focus:placeholder:text-primary-200;
+  }
 
-    .fixed-header {
-       position: fixed;
-       background-color: theme(colors.primary.950);
-       z-index: 6;
-       right: 0;
-       left: 0;
-       top:0;
-       animation: slideDown 400ms;
-    }
+  .form {
+    @apply grid grid-cols-1 gap-2 sm:gap-3 md:gap-4;
+  }
 
-    .spinner-mini {
-        margin: 0;
-        width: 22px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        border: 4px solid;
-        animation: rotate 1s infinite linear;
-        -webkit-animation: rotate 1s infinite linear;
-    }
+  .fixed-header {
+    position: fixed;
+    z-index: 6;
+    right: 0;
+    left: 0;
+    top: 0;
+    animation: slideDown 400ms;
+    background-color: var(--color-primary-950);
+  }
 
-    .animate-bottom-nav {
+  .spinner-mini {
+    margin: 0;
+    width: 22px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 4px solid;
+    animation: rotate 1s infinite linear;
+    -webkit-animation: rotate 1s infinite linear;
+  }
+
+  .animate-bottom-nav {
     animation: slideUp 0.7s;
-    }
+  }
 
-    @keyframes slideUp {
-        from {
-            transform: translateY(110px);
-        } to {
-            transform: translateY(0);
-
-        }
+  @keyframes slideUp {
+    from {
+      transform: translateY(110px);
     }
-
-    @keyframes rotate {
-        to {
-            transform: rotate(1turn);
-        }
+    to {
+      transform: translateY(0);
     }
+  }
 
-    @keyframes slideDown {
-        from {
-            transform: translateY(-110px);
-        } to {
-            transform: translateY(0);
-        }
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
     }
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-110px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 }

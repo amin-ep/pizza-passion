@@ -1,20 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-// import logo from "@/public/images/pizza-icon.png";
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-4 z-10 ml-5 sm:ml-0">
-      <div className="relative w-8 aspect-square sm:w-14 md:w-16 hidden sm:flex">
+    <Link href="/menu" className="flex items-center gap-4">
+      <div className="relative aspect-square w-8 sm:w-14 md:w-16">
         <Image
-          src="/images/pizza-icon.png"
+          src="/icons/pizza-icon.svg"
           alt="Pizza Passion Logo"
           fill
-          quality={100}
           className="object-cover"
         />
       </div>
-      <span className="font-semibold text-lg sm:text-2xl uppercase text-accent-500">
+      <span className="text-base font-semibold uppercase text-accent-600 md:text-lg lg:text-xl xl:text-2xl">
         Pizza Passion
       </span>
     </Link>

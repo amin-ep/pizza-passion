@@ -35,6 +35,9 @@ module.exports = {
           950: "#382814",
         },
       },
+      screens: {
+        xsm: "425px",
+      },
     },
   },
   plugins: [],

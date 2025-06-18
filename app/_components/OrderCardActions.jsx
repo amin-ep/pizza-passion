@@ -1,7 +1,7 @@
 "use client";
 
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
-import { cancelOrder } from "../_lib/actions";
+// import { cancelOrder } from "../_lib/actions";
 import { useTransition } from "react";
 import SpinnerMini from "./SpinnerMini";
 import Link from "next/link";
@@ -15,9 +15,9 @@ function OrderCardActions({ id, onCancel }) {
   }
 
   return (
-    <div className={`border-l border-primary-900 grid grid-cols-2`}>
+    <div className={`grid grid-cols-2 border-l border-primary-900`}>
       <button
-        className="border-r border-primary-900 flex justify-center items-center gap-1 hover:bg-accent-500 hover:text-primary-800 transition-all"
+        className="flex items-center justify-center gap-1 border-r border-primary-900 transition-all hover:bg-accent-500 hover:text-primary-800"
         onClick={handleCancel}
       >
         {!isPending ? (
@@ -34,8 +34,7 @@ function OrderCardActions({ id, onCancel }) {
 
       <Link
         href={`orders/edit/${id}`}
-        className="border-r border-primary-900 flex justify-center items-center gap-1
- hover:bg-accent-500 hover:text-primary-800 transition-all"
+        className="flex items-center justify-center gap-1 border-r border-primary-900 transition-all hover:bg-accent-500 hover:text-primary-800"
       >
         <HiOutlinePencilSquare size={20} />
         <span>Update</span>

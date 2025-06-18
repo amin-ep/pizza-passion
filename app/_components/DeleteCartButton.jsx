@@ -1,18 +1,13 @@
 "use client";
 
-import { useCart } from "../_contexts/CartContext";
 import LinkButton from "./LinkButton";
 import SpinnerMini from "./SpinnerMini";
 
 function DeleteCartButton({ id }) {
-  const { deleteCartById, status } = useCart();
+  // !fix me
   return (
-    <LinkButton
-      onClick={() => {
-        deleteCartById(id);
-      }}
-    >
-      {status === "deleting" ? <SpinnerMini /> : "Delete All"}
+    <LinkButton type="button">
+      {"deleting" === "deleting" ? <SpinnerMini /> : "Delete All"}
     </LinkButton>
   );
 }

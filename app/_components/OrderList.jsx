@@ -1,7 +1,7 @@
 "use client";
 import OrderCard from "./OrderCard";
 import { useOptimistic } from "react";
-import { cancelOrder } from "../_lib/actions";
+// import { cancelOrder } from "../_lib/actions";
 
 function OrderList({ orders }) {
   const [optimisticOrders, optimisticCancel] = useOptimistic(
@@ -10,12 +10,12 @@ function OrderList({ orders }) {
       const targetOrderIndex = curOrders.findIndex((el) => el._id === orderId);
       curOrders[targetOrderIndex].canceled = true;
       return curOrders;
-    }
+    },
   );
 
   async function handleCancel(orderId) {
     optimisticCancel(orderId);
-    await cancelOrder(orderId);
+    // await cancelOrder(orderId);
   }
 
   return (

@@ -8,15 +8,23 @@ export async function getCart() {
     if (!token) {
       throw new Error("You must be logged in");
     }
-    const res = await axios.get(`${process.env.API_BASE_URL}/cart/myCart`, {
+
+    const res = await fetch(`${process.env.API_BASE_URL}/cart/myCart`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+      next: {
+        tags: "cart",
+      },
     });
 
-    return res?.data;
+    if (res.status === 200) {
+      const data = await res.json();
+      return data.data.cart;
+    }
   } catch (err) {
-    return err?.response?.data?.message || "Something went wrong!";
+    console.log("error: ", err);
+    // return err?.message || "Something went wrong!";
   }
 }

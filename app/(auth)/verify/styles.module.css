@@ -1,0 +1,21 @@
+.page {
+  background: repeating-linear-gradient(
+    135deg,
+    #d4dee7,
+    #d4dee7 5%,
+    #ffffff 5%,
+    #ffffff 10%
+  );
+}
+
+@media (min-width: 768px) {
+  .page {
+    background: repeating-linear-gradient(
+      135deg,
+      #d4dee7,
+      #d4dee7 3%,
+      #ffffff 3%,
+      #ffffff 6%
+    );
+  }
+}

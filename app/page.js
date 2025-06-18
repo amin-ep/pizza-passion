@@ -1,20 +1,21 @@
-import bg from "@/public/images/bg.jpg";
+import bg from "@/public/images/high-angle-shot-pizza-pieces-wooden-roller-wooden.jpg";
 import Image from "next/image";
-import HomepageSection from "./_components/HomepageSection";
-function Page() {
+import WelcomeSection from "./_components/WelcomeSection/WelcomeSection";
+
+function HomePage() {
   return (
-    <main className="mt-24">
+    <>
       <Image
         src={bg}
         quality={100}
         fill
         placeholder="blur"
         alt="Pizza"
-        className="object-cover object-top"
+        className="object-cover object-left sm:object-center"
       />
-      <HomepageSection />
-    </main>
+      <WelcomeSection />
+    </>
   );
 }
 
-export default Page;
+export default HomePage;

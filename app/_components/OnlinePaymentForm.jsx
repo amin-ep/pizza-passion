@@ -3,8 +3,6 @@
 import { useEffect, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { useAuth } from "../_contexts/AuthContext";
-import { useCart } from "../_contexts/CartContext";
 import { createOrder } from "../_lib/actions";
 import FormControl from "./FormControl";
 import LinkButton from "./LinkButton";
@@ -30,8 +28,7 @@ function OnlinePaymentForm() {
     }
   };
 
-  const { cartId, cartTotalPrice, cartTotalQuantity, orderCart } = useCart();
-  const { userData } = useAuth();
+  // const { userData } = useAuth();
 
   const {
     register,
@@ -40,15 +37,16 @@ function OnlinePaymentForm() {
     reset,
   } = useForm();
 
-  useEffect(() => {
-    if (cartId && userData._id)
-      reset({
-        cart: cartId || "",
-        customer: userData._id,
-        isPaid: true,
-      });
-  }, [cartId, userData._id, reset]);
+  // useEffect(() => {
+  //   if (cartId && userData._id)
+  //     reset({
+  //       cart: cartId || "",
+  //       customer: userData._id,
+  //       isPaid: true,
+  //     });
+  // }, [cartId, userData._id, reset]);
 
+  // !fix me
   const onSubmit = async (data) => {
     data.address = {
       text: data.address,
@@ -61,26 +59,26 @@ function OnlinePaymentForm() {
 
     startTransition(() => {
       createOrder(data).then((res) => {
-        orderCart();
+        // orderCart();
       });
     });
   };
 
   return (
-    <div className="w-full flex flex-col gap-5">
+    <div className="flex w-full flex-col gap-5">
       <div className="grid grid-cols-1 gap-3">
-        <h1 className="text-3xl md:text-4xl text-accent-500">Online Paying</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] border border-primary-900 p-3 rounded-sm">
+        <h1 className="text-3xl text-accent-500 md:text-4xl">Online Paying</h1>
+        <div className="grid grid-cols-1 rounded-sm border border-primary-900 p-3 sm:grid-cols-[1fr_auto]">
           <div className="flex items-center justify-start gap-3">
-            <span className="bg-accent-500 text-primary-800 text-4xl sm:text-5xl rounded-sm">
+            <span className="rounded-sm bg-accent-500 text-4xl text-primary-800 sm:text-5xl">
               <HiOutlineShoppingCart />
             </span>
-            <p className="text-sm sm:text-xl font-bold text-primary-200">
+            <p className="text-sm font-bold text-primary-200 sm:text-xl">
               Order Your cart with {cartTotalQuantity} Pizzas
             </p>
           </div>
           <div className="flex items-center justify-end">
-            <p className="text-3xl text-accent-500 relative before:content-['$'] before:text-lg before:absolute before:top-0 before:-translate-x-3">
+            <p className="relative text-3xl text-accent-500 before:absolute before:top-0 before:-translate-x-3 before:text-lg before:content-['$']">
               {cartTotalPrice}
             </p>
           </div>
@@ -107,12 +105,12 @@ function OnlinePaymentForm() {
               ))}
             </div>
           </FormControl>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-1 md:gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-1 md:gap-3">
             <div className="grid grid-cols-2 items-center">
               <label htmlFor="cvv2">CVV2*</label>
               <input type="number" className="input text-center" id="cvv2" />
             </div>
-            <div className="grid grid-cols-[auto_1fr] gap-2 items-center">
+            <div className="grid grid-cols-[auto_1fr] items-center gap-2">
               <label>Expiry Date*</label>
               <div className="grid grid-cols-2 gap-1">
                 <FormControl variation="row" classNames="items-center">

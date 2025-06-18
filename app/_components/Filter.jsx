@@ -20,13 +20,13 @@ function Filter() {
 
   return (
     <motion.div
-      initial={{ translateX: 550 }}
-      animate={{ translateX: 0 }}
+      initial={{ translateX: 40, opacity: 0 }}
+      animate={{ translateX: 0, opacity: 1 }}
       transition={{
         duration: 0.7,
         delay: 0,
       }}
-      className="border border-primary-800 flex"
+      className="flex border border-primary-800"
     >
       <Button
         filter="all"
@@ -63,8 +63,10 @@ function Filter() {
 function Button({ filter, handleFilter, activeFilter, children }) {
   return (
     <button
-      className={`px-1 sm:px-5 py-2 hover:bg-primary-700 ${
-        filter === activeFilter ? "bg-primary-700 text-primary-50" : ""
+      className={`relative z-[2] px-1 py-2 sm:px-5 ${
+        filter === activeFilter
+          ? "bg-primary-700 text-primary-50"
+          : "transition-all after:absolute after:inset-0 after:z-[1] after:scale-0 after:bg-primary-700/30 after:transition-all hover:after:scale-[1]"
       }`}
       onClick={handleFilter}
     >

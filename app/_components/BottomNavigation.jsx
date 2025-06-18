@@ -9,7 +9,6 @@ import {
   HiMiniUser,
   HiOutlineArrowRightOnRectangle,
 } from "react-icons/hi2";
-import { useAuth } from "../_contexts/AuthContext";
 
 const navLinks = [
   {
@@ -34,15 +33,14 @@ const navLinks = [
 
 function BottomNavigation() {
   const pathname = usePathname();
-  const { logout } = useAuth();
 
   return (
-    <nav className="bg-primary-950 border-t border-primary-900 md:hidden fixed bottom-0 right-0 left-0 animate-bottom-nav">
-      <ul className="flex flex-row justify-between sm:justify-evenly items-center px-3">
+    <nav className="animate-bottom-nav fixed bottom-0 left-0 right-0 border-t border-primary-900 bg-primary-950 md:hidden">
+      <ul className="flex flex-row items-center justify-between px-3 sm:justify-evenly">
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
-              className={`py-3 px-1 transition-colors flex flex-col items-center gap-2 font-semibold ${
+              className={`flex flex-col items-center gap-2 px-1 py-3 font-semibold transition-colors ${
                 pathname === link.href ? "text-accent-500" : "text-primary-200"
               }`}
               href={link.href}
@@ -55,8 +53,8 @@ function BottomNavigation() {
 
         <li>
           <button
-            className="py-3 px-1 transition-colors flex flex-col items-center gap-2 font-semibold text-primary-200"
-            onClick={() => logout()}
+            className="flex flex-col items-center gap-2 px-1 py-3 font-semibold text-primary-200 transition-colors"
+            // onClick={() => logout()}
           >
             <HiOutlineArrowRightOnRectangle className="h-5 w-5 text-primary-600" />
             <span>Sign out</span>
