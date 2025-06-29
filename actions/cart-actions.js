@@ -1,5 +1,6 @@
 "use server";
 
+import { getCart } from "@/app/_services/cart-api";
 import { getMe } from "@/app/_services/user-api";
 import axios from "axios";
 import { revalidateTag } from "next/cache";
@@ -66,6 +67,35 @@ export async function removeFromCart(formData) {
           message: "removed successfully successfully",
         };
       }
+    }
+  } catch (err) {
+    return {
+      status: "error",
+      message: err?.response?.data?.message || "Server error!",
+    };
+  }
+}
+
+export async function deleteCartById() {
+  try {
+    const token = await cookies().get(process.env.JWT_SECRET)?.value;
+    const cart = await getCart();
+    const res = await axios.delete(
+      `${process.env.API_BASE_URL}/cart/${cart._id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (res.status === 204) {
+      revalidateTag("cart");
+      return {
+        status: "success",
+        message: "Cart deleted!",
+      };
     }
   } catch (err) {
     return {

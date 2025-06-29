@@ -1,5 +1,7 @@
+import { deleteCartById } from "@/actions/cart-actions";
 import CartList from "@/app/_components/CartList/CartList";
 import CartOrderForm from "@/app/_components/CartOrderForm";
+import DeleteCartButton from "@/app/_components/DeleteCartButton";
 import AnimatedHeading from "@/app/_components/motions/AnimatedHeading";
 import { getCart } from "@/app/_services/cart-api";
 import { getMe } from "@/app/_services/user-api";
@@ -29,7 +31,12 @@ async function Items() {
 export default async function CartPage() {
   return (
     <>
-      <AnimatedHeading>Your Cart</AnimatedHeading>
+      <div className="my-6 flex flex-col items-center justify-center xsm:flex-row xsm:justify-between">
+        <AnimatedHeading>Your Cart</AnimatedHeading>
+        <form action={deleteCartById} className="w-full xsm:w-fit">
+          <DeleteCartButton />
+        </form>
+      </div>
       <Suspense fallback={<p>Loading...</p>}>
         <Items />
       </Suspense>
