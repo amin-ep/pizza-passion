@@ -1,12 +1,11 @@
 "use client";
 
-import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
-import { useTransition } from "react";
-import SpinnerMini from "./SpinnerMini";
-import Link from "next/link";
 import { cancelOrder, setOrderReceived } from "@/actions/order-actions";
 import clsx from "clsx";
+import { useTransition } from "react";
+import { HiOutlineTrash } from "react-icons/hi2";
 import { toast } from "react-toastify";
+import SpinnerMini from "./SpinnerMini";
 
 function OrderCardActions({ id, status }) {
   const [isPending, startTransition] = useTransition();
@@ -32,23 +31,13 @@ function OrderCardActions({ id, status }) {
     "flex items-center justify-center gap-1 border-r border-primary-900 transition-all hover:bg-accent-500 hover:text-primary-800";
 
   return (
-    <div
-      className={clsx(
-        "grid border-l border-primary-900",
-        status === "posted" ? "grid-cols-1" : "grid-cols-2",
-      )}
-    >
+    <div className={clsx("grid grid-cols-1 border-l border-primary-900")}>
       {status !== "posted" ? (
         <>
           <button className={btnClasses} onClick={handleCancel}>
             {isPending ? <SpinnerMini /> : <HiOutlineTrash size={20} />}
             <span>{isPending ? "Canceling" : "Cancel"}</span>
           </button>
-
-          <Link href={`orders/edit/${id}`} className={btnClasses}>
-            <HiOutlinePencilSquare size={20} />
-            <span>Update</span>
-          </Link>
         </>
       ) : (
         <button className={btnClasses} onClick={handleReceive}>
