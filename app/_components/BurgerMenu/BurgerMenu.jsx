@@ -1,13 +1,13 @@
 "use client";
 
+import clsx from "clsx";
+import { motion } from "framer-motion";
 import { useState } from "react";
+import { BsCart4 } from "react-icons/bs";
+import { IoRestaurantOutline } from "react-icons/io5";
+import { RiAccountPinBoxLine, RiInfoCardLine } from "react-icons/ri";
 import BurgerButton from "./BurgerButton";
 import BurgerLink from "./BurgerLink";
-import clsx from "clsx";
-import { RiInfoCardLine, RiAccountPinBoxLine } from "react-icons/ri";
-import { IoRestaurantOutline } from "react-icons/io5";
-import { BsCart4 } from "react-icons/bs";
-import { motion } from "framer-motion";
 
 const navItems = [
   { href: "/menu", icon: <IoRestaurantOutline /> },

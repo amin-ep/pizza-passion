@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function Filter() {
   const searchParams = useSearchParams();

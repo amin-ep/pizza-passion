@@ -1,6 +1,6 @@
-import PizzaList from "@/app/_components/PizzaList";
-import MenuDescription from "@/app/_components/MenuDescription";
 import Filter from "@/app/_components/Filter";
+import MenuDescription from "@/app/_components/MenuDescription";
+import PizzaList from "@/app/_components/PizzaList";
 import { Suspense } from "react";
 
 export const revalidate = 3600;

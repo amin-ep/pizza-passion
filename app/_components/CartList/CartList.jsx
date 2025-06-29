@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { getCart } from "../../_services/cart-api";
 import CartItemIngredientsText from "../motions/CartItemIngredientsText";
 import CartItemName from "../motions/CartItemName";
 import CartItemQuantity from "../motions/CartItemQuantity";

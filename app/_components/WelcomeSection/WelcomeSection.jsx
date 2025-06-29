@@ -1,7 +1,7 @@
-import Link from "next/link";
-import styles from "./WelcomeSection.module.css";
 import clsx from "clsx";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import styles from "./WelcomeSection.module.css";
 
 export default async function WelcomeSection() {
   const authToken = await cookies().get(process.env.JWT_SECRET);

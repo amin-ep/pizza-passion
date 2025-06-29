@@ -2,7 +2,6 @@ import ChangeEmailTimer from "@/app/_components/ChangeEmailTimer";
 import ChangeEmailVerifyForm from "@/app/_components/ChangeEmailVerifyForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import { cookies } from "next/headers";
-import React from "react";
 
 export default async function ChangeEmailVerify() {
   const candidateEmail = await cookies().get(process.env.CHANGE_EMAIL)?.value;

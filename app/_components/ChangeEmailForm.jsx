@@ -1,16 +1,16 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import FormControl from "./FormControl";
-import LinkButton from "./LinkButton";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { changeEmailSchema } from "../_validators/profile-validators";
-import { useTransition } from "react";
 import { requestChangeEmail } from "@/actions/profile-actions";
-import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { convertErrors } from "../_utils/helpers";
+import { changeEmailSchema } from "../_validators/profile-validators";
+import FormControl from "./FormControl";
 import FormErrorList from "./FormErrorList";
+import LinkButton from "./LinkButton";
 
 export default function ChangeEmailForm({ email }) {
   const [isPending, startTransition] = useTransition();

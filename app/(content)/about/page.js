@@ -1,13 +1,13 @@
-import Image from "next/image";
 import image1 from "@/public/images/about-1.jpg";
 import image2 from "@/public/images/about-2.jpg";
 import image3 from "@/public/images/about-3.jpg";
 import image4 from "@/public/images/about-4.jpg";
+import Image from "next/image";
 import Link from "next/link";
 
-import AnimatedParagraph from "@/app/_components/motions/AnimatedParagraph";
-import AnimatedHeading from "@/app/_components/motions/AnimatedHeading";
 import AboutImageContainer from "@/app/_components/motions/AboutImageContainer";
+import AnimatedHeading from "@/app/_components/motions/AnimatedHeading";
+import AnimatedParagraph from "@/app/_components/motions/AnimatedParagraph";
 
 export const metadata = {
   title: "About",

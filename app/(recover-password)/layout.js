@@ -1,9 +1,8 @@
 import "@/app/_styles/globals.css";
 
-import { ToastContainer } from "react-toastify";
+import clsx from "clsx";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./layout.module.css";
-import clsx from "clsx";
 
 export const metadata = {
   title: {

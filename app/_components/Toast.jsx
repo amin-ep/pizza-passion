@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { ToastContainer, cssTransition } from "react-toastify";
 
 export default function Toast() {

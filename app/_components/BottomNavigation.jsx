@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-  HiHome,
   HiCalendarDays,
+  HiHome,
   HiMiniUser,
   HiOutlineArrowRightOnRectangle,
 } from "react-icons/hi2";

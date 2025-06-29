@@ -1,7 +1,5 @@
-"use client";
-import { motion } from "framer-motion";
-import AnimatedParagraph from "./motions/AnimatedParagraph";
 import AnimatedHeading from "./motions/AnimatedHeading";
+import AnimatedParagraph from "./motions/AnimatedParagraph";
 
 function MenuDescription() {
   const description =

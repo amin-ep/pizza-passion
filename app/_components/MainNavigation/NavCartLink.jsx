@@ -1,7 +1,6 @@
 import { getCart } from "@/app/_services/cart-api";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default async function NavCartLink() {
   const cart = await getCart();

@@ -1,7 +1,6 @@
-import React from "react";
-import CartItemButton from "./CartItemButton";
-import Image from "next/image";
 import { addToCart, removeFromCart } from "@/actions/cart-actions";
+import Image from "next/image";
+import CartItemButton from "./CartItemButton";
 
 export default function CartItemActions({ pizzaId }) {
   return (

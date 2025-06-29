@@ -1,9 +1,8 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-import styles from "./AccessSection.module.css";
-import Image from "next/image";
 import FormHeaderLogo from "../FormHeaderLogo";
+import styles from "./AccessSection.module.css";
 
 function AccessSection() {
   return (

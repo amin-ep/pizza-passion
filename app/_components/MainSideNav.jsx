@@ -1,15 +1,14 @@
 import Link from "next/link";
-import Logo from "./Logo";
 
 function MainSideNav({ isOpen, token, onClose }) {
   return (
     <div
-      className={`md:hidden fixed h-dvh w-96 bg-primary-900/90 backdrop-blur-md z-60 left-0 top-0 transition-all ${
+      className={`z-60 fixed left-0 top-0 h-dvh w-96 bg-primary-900/90 backdrop-blur-md transition-all md:hidden ${
         !isOpen ? "-translate-x-96" : "translate-x-0"
-      } overflow-auto py-10 max-w-[80%]`}
+      } max-w-[80%] overflow-auto py-10`}
     >
       <ul className="flex flex-col px-8">
-        <div className="flex justify-center p-6 mb-10">
+        <div className="mb-10 flex justify-center p-6">
           <Link href="/" className="text-[22px] text-accent-500">
             Pizza Passion
           </Link>
@@ -32,7 +31,7 @@ function NavItem({ children, href, onClose }) {
   return (
     <li className="border-b border-primary-200/75 py-4 text-center">
       <Link
-        className="hover:text-accent-500 text-lg"
+        className="text-lg hover:text-accent-500"
         href={href}
         onClick={onClose}
       >

@@ -1,10 +1,9 @@
-import React from "react";
-import NavLink from "../NavLink";
+import clsx from "clsx";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import NavCartLink from "./NavCartLink";
+import NavLink from "../NavLink";
 import AccountLink from "./AccountLink";
-import clsx from "clsx";
+import NavCartLink from "./NavCartLink";
 
 export default async function MainNavigation() {
   const authToken = await cookies().get(process.env.JWT_SECRET)?.value;

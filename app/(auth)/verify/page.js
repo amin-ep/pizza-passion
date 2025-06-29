@@ -1,10 +1,9 @@
-import clsx from "clsx";
-import styles from "./styles.module.css";
-import Image from "next/image";
-import { cookies } from "next/headers";
+import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import VerifyForm from "@/app/_components/VerifyForm";
 import VerifyTimer from "@/app/_components/VerifyTimer";
-import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
+import clsx from "clsx";
+import { cookies } from "next/headers";
+import styles from "./styles.module.css";
 
 export default async function VerifyPage() {
   const email = await cookies().get(process.env.SIGN_UP_EMAIL)?.value;

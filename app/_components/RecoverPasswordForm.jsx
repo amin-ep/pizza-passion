@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import FormControl from "./FormControl";
-import LinkButton from "./LinkButton";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { recoverPasswordSchema } from "../_validators/auth-validators";
-import FormErrorList from "./FormErrorList";
 import { recoverPassword } from "@/actions/auth-actions";
-import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useEffect, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { recoverPasswordSchema } from "../_validators/auth-validators";
+import FormControl from "./FormControl";
+import FormErrorList from "./FormErrorList";
+import LinkButton from "./LinkButton";
 
 export default function RecoverPasswordForm({ recoverId }) {
   const [isPending, startTransition] = useTransition();

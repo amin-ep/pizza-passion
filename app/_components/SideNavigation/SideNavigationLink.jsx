@@ -1,9 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import clsx from "clsx";
 
 export default function SideNavigationLink({ href, children, iconPath, alt }) {
   const pathname = usePathname();

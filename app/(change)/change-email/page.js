@@ -1,7 +1,6 @@
 import ChangeEmailForm from "@/app/_components/ChangeEmailForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import { getMe } from "@/app/_services/user-api";
-import React from "react";
 
 export default async function ChangeEmailPage() {
   const currentUser = await getMe();

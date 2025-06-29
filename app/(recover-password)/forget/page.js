@@ -1,6 +1,5 @@
 import ForgetPasswordForm from "@/app/_components/ForgetPasswordForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
-import React from "react";
 
 export default function ForgetPage() {
   return (

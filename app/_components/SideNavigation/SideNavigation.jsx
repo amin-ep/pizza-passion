@@ -1,4 +1,3 @@
-import Image from "next/image";
 import SideNavigationListItem from "../motions/SideNavigationListItem";
 import SideNavigationLink from "./SideNavigationLink";
 import SignOut from "./SignOut";

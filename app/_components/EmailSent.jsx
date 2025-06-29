@@ -1,7 +1,6 @@
-import React from "react";
-import FormHeaderLogo from "./FormHeaderLogo";
 import Image from "next/image";
 import Link from "next/link";
+import FormHeaderLogo from "./FormHeaderLogo";
 
 export default function EmailSent({ email }) {
   return (

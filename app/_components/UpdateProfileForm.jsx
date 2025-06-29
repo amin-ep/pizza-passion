@@ -1,15 +1,15 @@
 "use client";
 
+import { updateProfile } from "@/actions/profile-actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { profileSchema } from "../_validators/profile-validators";
 import FormControl from "./FormControl";
 import FormErrorList from "./FormErrorList";
 import LinkButton from "./LinkButton";
-import { updateProfile } from "@/actions/profile-actions";
-import { toast } from "react-toastify";
 
 function UpdateProfileForm({ data }) {
   const [isPending, startTransition] = useTransition();

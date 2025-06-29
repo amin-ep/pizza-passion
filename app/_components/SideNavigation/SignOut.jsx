@@ -1,6 +1,5 @@
 import { logout } from "@/actions/auth-actions";
 import Image from "next/image";
-import React from "react";
 
 export default function SignOut() {
   return (
