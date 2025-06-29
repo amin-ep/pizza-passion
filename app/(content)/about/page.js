@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import AnimatedParagraph from "@/app/_components/motions/AnimatedParagraph";
 import AnimatedHeading from "@/app/_components/motions/AnimatedHeading";
+import AboutImageContainer from "@/app/_components/motions/AboutImageContainer";
 
 export const metadata = {
   title: "About",
@@ -22,23 +23,23 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="relative lg:col-span-2">
+      <AboutImageContainer index={0}>
         <Image
           placeholder="blur"
           className="h-auto w-full object-cover"
           src={image1}
           alt="Pizzas on each other"
         />
-      </div>
+      </AboutImageContainer>
 
-      <div className="relative lg:col-span-2">
+      <AboutImageContainer index={1}>
         <Image
           placeholder="blur"
           className="h-auto w-full object-cover"
           src={image2}
           alt="Chef is making pizza"
         />
-      </div>
+      </AboutImageContainer>
 
       <div className="relative text-center lg:col-span-3 lg:text-left">
         <AnimatedHeading>How It Works</AnimatedHeading>
@@ -54,23 +55,23 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="relative lg:col-span-2">
+      <AboutImageContainer index={2}>
         <Image
           className="h-auto w-full object-cover"
           placeholder="blur"
           src={image3}
           alt="Pizzas on each other"
         />
-      </div>
+      </AboutImageContainer>
 
-      <div className="relative lg:col-span-2">
+      <AboutImageContainer index={3}>
         <Image
           className="h-auto w-full object-cover"
           placeholder="blur"
           src={image4}
           alt="Family is eating pizza"
         />
-      </div>
+      </AboutImageContainer>
 
       <div className="relative text-center lg:col-span-3 lg:text-left">
         <AnimatedHeading>Our Promise</AnimatedHeading>

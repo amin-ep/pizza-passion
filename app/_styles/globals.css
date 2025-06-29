@@ -52,6 +52,51 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.toast-enter {
+  animation: toastEnter;
+  -webkit-animation: toastEnter;
+  animation-duration: 0.4s;
+}
+
+.toast-exit {
+  animation: toastExit;
+  -webkit-animation: toastExit;
+  animation-duration: 0.4s;
+}
+
+@keyframes toastEnter {
+  from {
+    transform: translateY(-100px);
+    -webkit-transform: translateY(-100px);
+    -moz-transform: translateY(-100px);
+    -ms-transform: translateY(-100px);
+    -o-transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+  }
+}
+
+@keyframes toastExit {
+  from {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100px);
+    -webkit-transform: translateY(-100px);
+    -moz-transform: translateY(-100px);
+    -ms-transform: translateY(-100px);
+    -o-transform: translateY(-100px);
+  }
+}
 @layer components {
   .btn {
     @apply flex items-center justify-center gap-2 bg-accent-500 px-5 py-3 text-center font-semibold text-primary-800 outline-none transition-all hover:bg-accent-600 disabled:cursor-not-allowed;

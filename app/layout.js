@@ -1,7 +1,7 @@
 import "@/app/_styles/globals.css";
 import { Josefin_Sans } from "next/font/google";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Toast from "./_components/Toast";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -20,14 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${josefin.className} bg-primary-950 text-primary-100`}>
-        <ToastContainer
-          autoClose={5000}
-          limit={3}
-          position="top-right"
-          draggable="touch"
-          theme="dark"
-        />
-
+        <Toast />
         <div>{children}</div>
       </body>
     </html>

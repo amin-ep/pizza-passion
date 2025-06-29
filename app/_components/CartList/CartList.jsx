@@ -6,9 +6,7 @@ import CartItemQuantity from "../motions/CartItemQuantity";
 import CartListItem from "../motions/CartListItem";
 import CartItemActions from "./CartItemActions";
 
-export default async function CartList() {
-  const cart = await getCart();
-
+export default function CartList({ cart }) {
   return (
     <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4">
       {cart.cartItems.map((item, idx) => (
@@ -31,14 +29,18 @@ export default async function CartList() {
           <section className="flex h-full justify-between border-t border-primary-800">
             <div className="flex items-center justify-center">
               <CartItemQuantity index={idx}>{item.quantity}</CartItemQuantity>
-              <div className="flex p-2">
+              <div className="flex h-full items-center gap-2 border-r border-primary-800 px-2 sm:px-4">
                 {item.pizza.discount > 0 ? (
                   <>
-                    <p>${item.pizza.finalPrice}</p>
-                    <p>${item.pizza.unitPrice}</p>
+                    <p className="text-sm text-accent-600 sm:text-base">
+                      ${item.pizza.finalPrice}
+                    </p>
+                    <p className="text-xs line-through sm:text-sm">
+                      ${item.pizza.unitPrice}
+                    </p>
                   </>
                 ) : (
-                  <p>{item.finalPrice}</p>
+                  <p>${item.finalPrice}</p>
                 )}
               </div>
             </div>

@@ -1,10 +1,7 @@
-import { getMe } from "@/app/_services/user-api";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default async function AccountLink() {
-  const currentUser = await getMe();
   return (
     <Link href="/account">
       <Image

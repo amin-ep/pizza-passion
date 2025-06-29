@@ -9,9 +9,12 @@ import { forgetPasswordSchema } from "../_validators/auth-validators";
 import FormErrorList from "./FormErrorList";
 import { forgetPassword } from "@/actions/auth-actions";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function ForgetPasswordForm() {
   const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
 
   const {
     register,
@@ -26,6 +29,7 @@ export default function ForgetPasswordForm() {
       const res = await forgetPassword(data);
       if (res.status === "success") {
         toast.success(res.message);
+        router.push("/sent");
       } else {
         toast.error(res.message);
       }

@@ -12,15 +12,15 @@ async function Page() {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-xl text-accent-500">Your orders</p>
-      {orders.data.length > 0 ? (
-        <OrderList orders={orders.data} />
+      {orders.length > 0 ? (
+        <OrderList orders={orders} />
       ) : (
         <div className="">
           <p>
             You do not have any orders.{" "}
             <Link
               href="/menu"
-              className="text-accent-500 hover:underline hover:text-accent-700"
+              className="text-accent-500 hover:text-accent-700 hover:underline"
             >
               Click
             </Link>{" "}

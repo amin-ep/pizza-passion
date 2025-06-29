@@ -13,7 +13,7 @@ function PizzaCard({ pizza }) {
         />
       </div>
       <div className="items-between grid grid-cols-1 grid-rows-[120px_50px]">
-        <div className="border-b border-primary-800 p-3">
+        <div className="overflow-hidden border-b border-primary-800 p-3">
           <p className="text-2xl font-semibold text-accent-500">{pizza.name}</p>
           <p>Ingredients: {pizza.ingredients.join(", ")}</p>
         </div>

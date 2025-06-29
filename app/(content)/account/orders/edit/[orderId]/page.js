@@ -1,6 +1,5 @@
 import FormControl from "@/app/_components/FormControl";
-import SubmitButton from "@/app/_components/SubmitButton";
-import { updateOrder } from "@/app/_lib/actions";
+import LinkButton from "@/app/_components/LinkButton";
 import { getOrderById } from "@/app/_services/order-api";
 
 async function page({ params }) {
@@ -9,7 +8,7 @@ async function page({ params }) {
 
   return (
     <div>
-      <form className="flex flex-col gap-4 pb-4" action={updateOrder}>
+      <form className="flex flex-col gap-4 pb-4">
         <input type="hidden" value={orderId} name="orderId" />
         <div className="grid grid-cols-2 gap-4">
           <FormControl label="Phone number" id="phone" variation="col">
@@ -42,7 +41,7 @@ async function page({ params }) {
             name="addressText"
             id="address-text"
             autoComplete="off"
-            className="input resize-none h-36"
+            className="input h-36 resize-none"
             defaultValue={order?.data.doc.address.text}
           />
         </FormControl>
@@ -51,12 +50,13 @@ async function page({ params }) {
             name="text"
             id="text"
             autoComplete="off"
-            className="input resize-none h-36"
+            className="input h-36 resize-none"
             defaultValue={order?.data.doc.text}
           />
         </FormControl>
         <div className="flex justify-end">
-          <SubmitButton pendingLabel="Updating...">Update Order</SubmitButton>
+          {/* <SubmitButton pendingLabel="Updating...">Update Order</SubmitButton> */}
+          <LinkButton type="submit">Update Orders</LinkButton>
         </div>
       </form>
     </div>

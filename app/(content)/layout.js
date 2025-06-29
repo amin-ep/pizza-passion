@@ -1,3 +1,4 @@
+import BurgerMenu from "../_components/BurgerMenu/BurgerMenu";
 import Logo from "../_components/Logo";
 import MainHeader from "../_components/MainHeader/MainHeader";
 import MainNavigation from "../_components/MainNavigation/MainNavigation";
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Logo />
         <MainNavigation />
       </MainHeader>
+      <BurgerMenu />
       <main className={`bg-primary-950 text-primary-100`}>
         <div className="mx-auto grid w-full max-w-7xl flex-1 px-8 py-12">
           {children}

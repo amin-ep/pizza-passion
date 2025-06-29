@@ -8,57 +8,61 @@ import Link from "next/link";
 import { SlCalender } from "react-icons/sl";
 import { FcCancel } from "react-icons/fc";
 import OrderCardActions from "./OrderCardActions";
+import OrderListItem from "./motions/OrderListItem";
+import { HiXMark } from "react-icons/hi2";
 
-function OrderCard({ order, onCancel }) {
-  const { status, createdAt, cart, canceled, _id: id } = order;
+function OrderCard({ order, onCancel, index }) {
+  const { status, createdAt, cart, _id: id } = order;
 
   return (
-    <li className="flex flex-col border border-primary-900">
+    <OrderListItem index={index}>
       <div className="flex items-center gap-2 p-3">
-        {canceled ? <FcCancel size={29} /> : <StatusIcon status={status} />}
-        <h1 className="uppercase text-primary-100">
-          {canceled ? "Canceled" : status}
-        </h1>
+        <StatusIcon status={status} />
+
+        <h1 className="uppercase text-primary-100">{status}</h1>
       </div>
       <div className="flex gap-4 border-b border-primary-900 p-3 text-primary-400">
-        <p className="font-semibold text-sm flex items-center gap-3">
+        <p className="flex items-center gap-3 text-sm font-semibold">
           <SlCalender size={14} />
           {format(createdAt, "y MMM d")} at {format(createdAt, "hh:mm")}
         </p>
-        <p className="text-accent-500 font-bold text-lg">${cart?.totalPrice}</p>
+        <p className="text-lg font-bold text-accent-500">${cart?.totalPrice}</p>
       </div>
       <div
         className={`grid ${
-          status === "waiting" || status === "accepted"
+          status === "waiting" || status === "accepted" || status === "posted"
             ? "grid-cols-[1fr_200px]"
             : "grid-cols-1"
         }`}
       >
-        <div className="flex p-3 gap-5">
+        <div className="flex gap-5 p-3">
           {cart?.cartItems.map((cart) => (
             <Link
               href={`/menu/${cart.pizza._id}`}
               key={cart._id}
-              className="relative w-16 aspect-square"
+              className="relative aspect-square w-16"
             >
               <Image
-                src={`http://localhost:8080/static/${cart?.pizza?.imageUrl}`}
+                src={`http://localhost:8000/static/${cart?.pizza?.imageUrl}`}
                 fill
                 alt={cart.pizza.name}
                 quality={100}
-                className="hover:scale-110 transition"
+                className="object-cover transition hover:scale-110"
               />
-              <p className="absolute -bottom-2 -right-[8px] text-sm bg-accent-500 w-6 aspect-square rounded-full text-primary-900 font-bold flex items-center justify-center">
+              <p className="absolute -bottom-2 -right-[8px] flex aspect-square w-6 items-center justify-center rounded-full bg-accent-500 text-sm font-bold text-primary-900">
                 {cart?.quantity}
               </p>
             </Link>
           ))}
         </div>
-        {!canceled && (status === "waiting" || status === "accepted") && (
-          <OrderCardActions id={id} onCancel={onCancel} />
-        )}
+        {status !== "cancelled" &&
+          (status === "waiting" ||
+            status === "accepted" ||
+            status === "posted") && (
+            <OrderCardActions status={status} id={id} onCancel={onCancel} />
+          )}
       </div>
-    </li>
+    </OrderListItem>
   );
 }
 
@@ -75,6 +79,12 @@ function StatusIcon({ status }) {
 
     case "posted":
       return <MdOutlinePostAdd size={29} className="bg-sky-500 p-1" />;
+
+    case "cancelled":
+      return <FcCancel size={29} className="bg-primary-900 p-1" />;
+
+    case "rejected":
+      return <HiXMark size={29} className="bg-rose-500 p-1" />;
 
     default:
       return null;

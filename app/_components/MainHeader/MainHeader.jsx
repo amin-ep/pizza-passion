@@ -26,37 +26,39 @@ export default function MainHeader({ children }) {
   }, []);
 
   return (
-    <motion.header
-      ref={ref}
-      className={clsx(
-        "hidden px-2 py-2 sm:block sm:px-4 md:px-6 lg:px-10 xl:px-12",
-        isScrolled
-          ? // ? "fixed left-0 right-0 top-0 z-10 backdrop-blur-lg"
-            styles.fixHeader
-          : "static",
-      )}
-      initial={{
-        y: -20,
-        opacity: 0,
-      }}
-      animate={{
-        y: 0,
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.4,
-      }}
-    >
-      <div
+    <div className="hidden h-[82px] sm:block md:h-[90px]">
+      <motion.header
+        ref={ref}
         className={clsx(
-          "mx-auto flex w-full max-w-[1280px] items-center justify-between rounded-sm border p-3 px-6",
+          "px-2 py-2 sm:px-4 md:px-6 lg:px-10 xl:px-12",
           isScrolled
-            ? "border-transparent bg-transparent"
-            : "border-primary-900 bg-primary-900/20",
+            ? // ? "fixed left-0 right-0 top-0 z-10 backdrop-blur-lg"
+              styles.fixHeader
+            : "static",
         )}
+        initial={{
+          y: -20,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.4,
+        }}
       >
-        {children}
-      </div>
-    </motion.header>
+        <div
+          className={clsx(
+            "mx-auto flex w-full max-w-[1280px] items-center justify-between rounded-sm border p-3 px-6",
+            isScrolled
+              ? "border-transparent bg-transparent"
+              : "border-primary-900 bg-primary-900/20",
+          )}
+        >
+          {children}
+        </div>
+      </motion.header>
+    </div>
   );
 }
