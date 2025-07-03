@@ -1,6 +1,11 @@
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import RecoverPasswordForm from "@/app/_components/RecoverPasswordForm";
-import React from "react";
+
+export const metadata = {
+  title: "Recover Password",
+  description:
+    "Set a new password for your Pizza Passion account. Enter and confirm your new password to regain access.",
+};
 
 export default function RecoverPage({ params }) {
   const { recoverId } = params;

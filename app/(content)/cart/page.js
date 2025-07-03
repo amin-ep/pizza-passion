@@ -7,6 +7,12 @@ import { getCart } from "@/app/_services/cart-api";
 import { getMe } from "@/app/_services/user-api";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: "Cart",
+  description:
+    "Review your pizza order before checkout. Customize your cart, apply discounts, and get ready to enjoy your meal.",
+};
+
 async function Items() {
   const cart = await getCart();
   const user = await getMe();

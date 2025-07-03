@@ -3,6 +3,12 @@ import ChangeEmailVerifyForm from "@/app/_components/ChangeEmailVerifyForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import { cookies } from "next/headers";
 
+export const metadata = {
+  title: "Verify New Email",
+  description:
+    "Confirm your new email address by entering the verification code we sent. Secure your Pizza Passion account with an up-to-date email.",
+};
+
 export default async function ChangeEmailVerify() {
   const candidateEmail = await cookies().get(process.env.CHANGE_EMAIL)?.value;
   return (

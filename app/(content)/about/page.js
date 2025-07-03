@@ -10,7 +10,9 @@ import AnimatedHeading from "@/app/_components/motions/AnimatedHeading";
 import AnimatedParagraph from "@/app/_components/motions/AnimatedParagraph";
 
 export const metadata = {
-  title: "About",
+  title: "About Pizza Passion",
+  description:
+    "Learn more about Pizza Passion — our story, our love for pizza, and the mission that drives us to deliver the best slices to your door.",
 };
 
 export default function Page() {

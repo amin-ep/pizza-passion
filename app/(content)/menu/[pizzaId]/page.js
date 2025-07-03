@@ -14,8 +14,8 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  const { name } = await getPizza(params.pizzaId);
-  return { title: name };
+  const { name, ingredients } = await getPizza(params.pizzaId);
+  return { title: name, description: ingredients.join(", ") };
 }
 
 export async function generateStaticParams() {

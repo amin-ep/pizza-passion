@@ -7,6 +7,8 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: "Menu",
+  description:
+    "Explore our full menu of mouthwatering pizzas and sides. Choose your favorites and order with just a few clicks.",
 };
 
 export default function Page({ searchParams }) {

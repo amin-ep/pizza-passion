@@ -1,6 +1,12 @@
 import ForgetPasswordForm from "@/app/_components/ForgetPasswordForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 
+export const metadata = {
+  title: "Forget Password",
+  description:
+    "Forgot your password? Enter your email and we’ll send you a link to reset it securely.",
+};
+
 export default function ForgetPage() {
   return (
     <div className="rounded-sm bg-primary-950 p-6 shadow-md lg:p-8">

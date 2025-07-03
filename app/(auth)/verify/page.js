@@ -5,6 +5,12 @@ import clsx from "clsx";
 import { cookies } from "next/headers";
 import styles from "./styles.module.css";
 
+export const metadata = {
+  title: "Verify Email",
+  description:
+    "Verify your email to activate your Pizza Passion account. Enter the code we sent to start ordering your favorite pizzas.",
+};
+
 export default async function VerifyPage() {
   const email = await cookies().get(process.env.SIGN_UP_EMAIL)?.value;
   return (

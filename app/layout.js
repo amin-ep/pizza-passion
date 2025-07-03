@@ -8,14 +8,6 @@ const josefin = Josefin_Sans({
   display: "swap",
 });
 
-export const metadata = {
-  title: {
-    template: "%s | Pizza Passion",
-    default: "Welcome | Pizza Passion",
-  },
-  description: "Order At Home, Eat at Home.Website for ordering italian pizzas",
-};
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

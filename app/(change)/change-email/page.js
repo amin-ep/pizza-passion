@@ -2,6 +2,12 @@ import ChangeEmailForm from "@/app/_components/ChangeEmailForm";
 import FormHeaderLogo from "@/app/_components/FormHeaderLogo";
 import { getMe } from "@/app/_services/user-api";
 
+export const metadata = {
+  title: "Change Email",
+  description:
+    "Change your registered email address for your Pizza Passion account. Enter your new email to receive a verification code.",
+};
+
 export default async function ChangeEmailPage() {
   const currentUser = await getMe();
 

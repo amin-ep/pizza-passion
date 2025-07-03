@@ -4,6 +4,8 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Orders",
+  description:
+    "View your past and current pizza orders in one convenient list. Reorder your favorites anytime with Pizza Passion.",
 };
 
 async function Page() {

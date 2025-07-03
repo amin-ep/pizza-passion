@@ -3,6 +3,8 @@ import { getMe } from "@/app/_services/user-api";
 
 export const metadata = {
   title: "Update Profile",
+  description:
+    "Update your personal information, email, and preferences. Keep your Pizza Passion profile up to date for a smoother ordering experience.",
 };
 
 async function Page() {
