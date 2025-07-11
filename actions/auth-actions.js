@@ -5,9 +5,7 @@ import {
   JWT_EXPIRES,
   SIGN_UP_EMAIL_EXPIRES,
 } from "@/app/_utils/constants";
-import { loginSchema, signupSchema } from "@/app/_validators/auth-validators";
 import axios from "axios";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
