@@ -11,6 +11,7 @@ import { changeEmailSchema } from "../_validators/profile-validators";
 import FormControl from "./FormControl";
 import FormErrorList from "./FormErrorList";
 import LinkButton from "./LinkButton";
+import { motion } from "framer-motion";
 
 export default function ChangeEmailForm({ email }) {
   const [isPending, startTransition] = useTransition();
@@ -46,7 +47,15 @@ export default function ChangeEmailForm({ email }) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register("email")} />
       <FormControl id="email" label="New Email">
-        <input
+        <motion.input
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
           type="email"
           id="email"
           className="input"

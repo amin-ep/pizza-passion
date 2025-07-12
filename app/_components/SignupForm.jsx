@@ -10,6 +10,7 @@ import FormControl from "./FormControl";
 import FormErrorList from "./FormErrorList";
 import LinkButton from "./LinkButton";
 import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
 
 export default function SignupForm() {
   const [isPending, startTransition] = useTransition();
@@ -40,7 +41,15 @@ export default function SignupForm() {
     <form className="form" onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
         <FormControl id="first-name" label="First Name">
-          <input
+          <motion.input
+            initial={{
+              opacity: 0,
+              y: 15,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             placeholder="your name"
             type="text"
             id="first-name"
@@ -50,7 +59,15 @@ export default function SignupForm() {
           />
         </FormControl>
         <FormControl id="last-name" label="Last Name">
-          <input
+          <motion.input
+            initial={{
+              opacity: 0,
+              y: 15,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             placeholder="your last name"
             type="text"
             id="last-name"
@@ -61,7 +78,18 @@ export default function SignupForm() {
         </FormControl>
       </div>
       <FormControl id="email" label="Email">
-        <input
+        <motion.input
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 0.4,
+          }}
           placeholder="enter a valid email"
           type="email"
           id="email"
@@ -71,7 +99,18 @@ export default function SignupForm() {
         />
       </FormControl>
       <FormControl id="phone" label="Phone Number (optional)">
-        <input
+        <motion.input
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 0.8,
+          }}
           placeholder="Your phone number"
           type="phone"
           id="phone"
@@ -81,7 +120,18 @@ export default function SignupForm() {
         />
       </FormControl>
       <FormControl id="password" label="Password">
-        <input
+        <motion.input
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 1.2,
+          }}
           placeholder="input a password"
           type="password"
           id="password"
@@ -91,7 +141,18 @@ export default function SignupForm() {
         />
       </FormControl>
       <FormControl id="password-confirm" label="Password Confirm">
-        <input
+        <motion.input
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 1.6,
+          }}
           placeholder="confirm your password"
           type="password"
           id="password-confirm"
@@ -105,9 +166,24 @@ export default function SignupForm() {
           errors={Object.values(errors).map((err) => err.message)}
         />
       )}
-      <LinkButton type="submit" isPending={isPending}>
-        Create Account
-      </LinkButton>
+      <motion.div
+        className="w-full"
+        initial={{
+          opacity: 0,
+          y: 15,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.4,
+        }}
+      >
+        <LinkButton extraClasses="w-full" type="submit" isPending={isPending}>
+          Create Account
+        </LinkButton>
+      </motion.div>
     </form>
   );
 }

@@ -1,16 +1,19 @@
+import FormControlLabel from "./FormControlLabel";
+
 export default function FormControl({
   children,
   classNames,
   variation = "col",
   id,
   label,
+  delay = 0,
 }) {
   return (
     <div className={`flex flex-${variation} ${classNames} gap-2`}>
       {label && (
-        <label className="w-fit text-lg" htmlFor={id}>
+        <FormControlLabel delay={delay} className="w-fit text-lg" htmlFor={id}>
           {label}
-        </label>
+        </FormControlLabel>
       )}
       {children}
     </div>

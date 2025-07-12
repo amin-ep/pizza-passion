@@ -11,6 +11,7 @@ import FormControl from "./FormControl";
 import FormErrorList from "./FormErrorList";
 import LinkButton from "./LinkButton";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -39,7 +40,15 @@ function LoginForm() {
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl id="email" label="Email">
-        <input
+        <motion.input
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
           placeholder="enter your email"
           type="email"
           id="email"
@@ -48,8 +57,19 @@ function LoginForm() {
           {...register("email")}
         />
       </FormControl>
-      <FormControl id="password" label="Password">
-        <input
+      <FormControl delay={0.4} id="password" label="Password">
+        <motion.input
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.4,
+          }}
           placeholder="input a your password"
           type="password"
           id="password"
@@ -61,9 +81,24 @@ function LoginForm() {
       {errorsArr && errorsArr.length > 0 && (
         <FormErrorList errors={Object.values(errorsArr)} />
       )}
-      <LinkButton isPending={isPending} type="submit">
-        Log In
-      </LinkButton>
+      <motion.div
+        initial={{
+          y: 15,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          delay: 0.8,
+        }}
+        className="w-full"
+      >
+        <LinkButton extraClasses="w-full" isPending={isPending} type="submit">
+          Log In
+        </LinkButton>
+      </motion.div>
       <div className="text-center">
         <Link href="/forget" className="hover:text-accent-500">
           Forget Password?

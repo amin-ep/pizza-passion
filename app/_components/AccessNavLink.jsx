@@ -1,14 +1,26 @@
 "use client";
 
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function AccessNavLink({ children, href }) {
+const MotionLink = motion(Link);
+
+export default function AccessNavLink({ children, href, delay = 0 }) {
   const pathname = usePathname();
 
   return (
-    <Link
+    <MotionLink
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        delay,
+      }}
       href={href}
       className={clsx(
         "btn",
@@ -19,6 +31,6 @@ export default function AccessNavLink({ children, href }) {
       )}
     >
       {children}
-    </Link>
+    </MotionLink>
   );
 }

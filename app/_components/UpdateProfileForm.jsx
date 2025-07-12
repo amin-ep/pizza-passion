@@ -70,7 +70,7 @@ function UpdateProfileForm({ data }) {
           <FormControl id="firstName" label="First Name">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               animate={{
@@ -85,10 +85,10 @@ function UpdateProfileForm({ data }) {
               placeholder="First Name"
             />
           </FormControl>
-          <FormControl id="lastName" label="Last Name">
+          <FormControl delay={0.4} id="lastName" label="Last Name">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               animate={{
@@ -106,10 +106,10 @@ function UpdateProfileForm({ data }) {
               placeholder="Last Name"
             />
           </FormControl>
-          <FormControl id="phone" label="Phone number">
+          <FormControl delay={0.6} id="phone" label="Phone number">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               animate={{
@@ -132,10 +132,10 @@ function UpdateProfileForm({ data }) {
       <div>
         <h2 className="mb-2 text-lg font-bold uppercase italic">Address</h2>
         <div className="flex flex-col gap-4">
-          <FormControl id="street" label="Street">
+          <FormControl delay={0.8} id="street" label="Street">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               animate={{
@@ -152,10 +152,10 @@ function UpdateProfileForm({ data }) {
               {...register("street")}
             />
           </FormControl>
-          <FormControl id="postal-code" label="Postal Code">
+          <FormControl delay={1} id="postal-code" label="Postal Code">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{
@@ -173,10 +173,10 @@ function UpdateProfileForm({ data }) {
               {...register("postalCode")}
             />
           </FormControl>
-          <FormControl id="text" label="Address Text">
+          <FormControl delay={1.2} id="text" label="Address Text">
             <motion.textarea
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{
@@ -196,11 +196,24 @@ function UpdateProfileForm({ data }) {
         </div>
       </div>
       {errorArr && errorArr.length > 0 && <FormErrorList errors={errorArr} />}
-      <div className="mt-6 flex justify-end">
+      <motion.div
+        initial={{
+          y: 20,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          delay: 1.4,
+        }}
+        className="mt-6 flex justify-end"
+      >
         <LinkButton type="submit" isPending={isPending}>
           Update Profile
         </LinkButton>
-      </div>
+      </motion.div>
     </form>
   );
 }

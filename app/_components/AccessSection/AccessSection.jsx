@@ -1,27 +1,25 @@
 import clsx from "clsx";
-import Link from "next/link";
-
-import FormHeaderLogo from "../FormHeaderLogo";
+import AccessParagraph from "./AccessParagraph";
 import styles from "./AccessSection.module.css";
+import BackLink from "./BackLink";
+import AccessLogo from "./AccessLogo";
 
 function AccessSection() {
   return (
     <section
       className={clsx("hidden p-6 text-left md:block lg:p-10", styles.section)}
     >
-      <FormHeaderLogo />
+      <AccessLogo />
       <div className="block text-left">
-        <p className="mt-4 text-base lg:text-lg xl:text-xl">
+        <AccessParagraph delay={0.4}>
           Stay at Home, Order At home, Pay at Door!
           <strong>Easy! Just Click and order!</strong>
-        </p>
-        <p className="mt-4 text-base lg:text-lg xl:text-xl">
+        </AccessParagraph>
+        <AccessParagraph delay={0.8}>
           Fast convenient, and contactless delivery to your door.
-        </p>
+        </AccessParagraph>
         <div className="mt-5">
-          <Link className="btn w-48" href="/">
-            Back Home
-          </Link>
+          <BackLink />
         </div>
       </div>
     </section>

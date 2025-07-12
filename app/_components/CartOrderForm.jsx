@@ -85,10 +85,10 @@ export default function CartOrderForm({ user }) {
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <span className="text-lg">Address</span>
         <div className="mb-2 flex flex-col gap-1 pl-2 md:mb-4 md:gap-2 md:pl-4 lg:mb-6 lg:gap-4 lg:pl-6">
-          <FormControl id="street" label="Street">
+          <FormControl delay={0.4} id="street" label="Street">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               animate={{
@@ -105,10 +105,10 @@ export default function CartOrderForm({ user }) {
               {...register("street")}
             />
           </FormControl>
-          <FormControl id="postal-code" label="Postal Code">
+          <FormControl delay={0.8} id="postal-code" label="Postal Code">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{
@@ -126,10 +126,10 @@ export default function CartOrderForm({ user }) {
               {...register("postalCode")}
             />
           </FormControl>
-          <FormControl id="text" label="Address Text">
+          <FormControl delay={1.2} id="text" label="Address Text">
             <motion.textarea
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{
@@ -148,10 +148,10 @@ export default function CartOrderForm({ user }) {
           </FormControl>
         </div>
         <div className="flex flex-col gap-1 md:gap-2 lg:gap-4">
-          <FormControl id="phone" label="Phone number">
+          <FormControl delay={1.6} id="phone" label="Phone number">
             <motion.input
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{
@@ -168,10 +168,14 @@ export default function CartOrderForm({ user }) {
               {...register("phone")}
             />
           </FormControl>
-          <FormControl id="description" label="Description (optional)">
+          <FormControl
+            delay={2}
+            id="description"
+            label="Description (optional)"
+          >
             <motion.textarea
               initial={{
-                y: -20,
+                y: 20,
                 opacity: 0,
               }}
               transition={{

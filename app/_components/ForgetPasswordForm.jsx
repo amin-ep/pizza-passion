@@ -9,6 +9,7 @@ import { forgetPasswordSchema } from "../_validators/auth-validators";
 import FormErrorList from "./FormErrorList";
 import { forgetPassword } from "@/actions/auth-actions";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export default function ForgetPasswordForm() {
@@ -39,7 +40,15 @@ export default function ForgetPasswordForm() {
   return (
     <form className="mt-4 md:mt-6" onSubmit={handleSubmit(onSubmit)}>
       <FormControl id="email" label="Email">
-        <input
+        <motion.input
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
           placeholder="input your email..."
           className="input"
           type="email"
