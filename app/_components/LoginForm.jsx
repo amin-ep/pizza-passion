@@ -95,7 +95,12 @@ function LoginForm() {
         }}
         className="w-full"
       >
-        <LinkButton extraClasses="w-full" isPending={isPending} type="submit">
+        <LinkButton
+          extraClasses="w-full"
+          isPending={isPending}
+          disabled={isPending}
+          type="submit"
+        >
           Log In
         </LinkButton>
       </motion.div>

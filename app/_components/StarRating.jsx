@@ -75,6 +75,7 @@ function StarRating({
         transition={{
           delay: 0.4,
         }}
+        disabled={isPending}
       >
         {isPending ? (
           <SpinnerMini />

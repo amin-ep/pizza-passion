@@ -57,7 +57,12 @@ export default function ForgetPasswordForm() {
         />
       </FormControl>
       {errors.email && <FormErrorList errors={Object.values(errors)} />}
-      <LinkButton isPending={isPending} extraClasses="mt-4" type="submit">
+      <LinkButton
+        isPending={isPending}
+        disabled={isPending}
+        extraClasses="mt-4"
+        type="submit"
+      >
         Send recover code
       </LinkButton>
     </form>

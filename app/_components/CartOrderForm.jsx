@@ -198,6 +198,7 @@ export default function CartOrderForm({ user }) {
           isPending={isPending}
           type="submit"
           extraClasses="mt-2 md:mt-4"
+          disabled={isPending}
         >
           Order Now!
         </LinkButton>

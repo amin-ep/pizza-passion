@@ -102,6 +102,7 @@ export default function RecoverPasswordForm({ recoverId }) {
           extraClasses="mt-5 w-full"
           type="submit"
           isPending={isPending}
+          disabled={isPending}
         >
           Reset Password
         </LinkButton>

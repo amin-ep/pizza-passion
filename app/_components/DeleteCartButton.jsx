@@ -17,7 +17,12 @@ export default function DeleteCartButton() {
         delay: 0.4,
       }}
     >
-      <LinkButton extraClasses="w-full" type="submit" isPending={pending}>
+      <LinkButton
+        extraClasses="w-full"
+        type="submit"
+        isPending={pending}
+        disabled={pending}
+      >
         Delete Cart
       </LinkButton>
     </motion.div>

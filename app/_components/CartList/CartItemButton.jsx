@@ -7,6 +7,7 @@ export default function CartItemButton({ children }) {
   const { pending } = useFormStatus();
   return (
     <button
+      disabled={pending}
       type="submit"
       className="flex h-full w-full items-center justify-center bg-accent-500"
     >

@@ -67,6 +67,7 @@ export default function ChangeEmailForm({ email }) {
         isPending={isPending}
         extraClasses="mt-4 w-full"
         type="submit"
+        disabled={isPending}
       >
         Send Email
       </LinkButton>

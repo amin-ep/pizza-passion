@@ -34,13 +34,21 @@ function OrderCardActions({ id, status }) {
     <div className={clsx("grid grid-cols-1 border-l border-primary-900")}>
       {status !== "posted" ? (
         <>
-          <button className={btnClasses} onClick={handleCancel}>
+          <button
+            className={btnClasses}
+            disabled={isPending}
+            onClick={handleCancel}
+          >
             {isPending ? <SpinnerMini /> : <HiOutlineTrash size={20} />}
             <span>{isPending ? "Canceling" : "Cancel"}</span>
           </button>
         </>
       ) : (
-        <button className={btnClasses} onClick={handleReceive}>
+        <button
+          disabled={isPending}
+          className={btnClasses}
+          onClick={handleReceive}
+        >
           {isPending ? "Updating..." : "Received"}
         </button>
       )}

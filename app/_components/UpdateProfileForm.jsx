@@ -210,7 +210,7 @@ function UpdateProfileForm({ data }) {
         }}
         className="mt-6 flex justify-end"
       >
-        <LinkButton type="submit" isPending={isPending}>
+        <LinkButton type="submit" isPending={isPending} disabled={isPending}>
           Update Profile
         </LinkButton>
       </motion.div>

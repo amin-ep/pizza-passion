@@ -180,7 +180,12 @@ export default function SignupForm() {
           delay: 0.4,
         }}
       >
-        <LinkButton extraClasses="w-full" type="submit" isPending={isPending}>
+        <LinkButton
+          extraClasses="w-full"
+          type="submit"
+          isPending={isPending}
+          disabled={isPending}
+        >
           Create Account
         </LinkButton>
       </motion.div>
