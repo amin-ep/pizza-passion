@@ -48,7 +48,7 @@ export default function RecoverPasswordForm({ recoverId }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 sm:mt-6">
       <input type="hidden" {...register("recoverId")} />
-      <FormControl id="password" label="Password">
+      <FormControl id="password" label="New Password">
         <motion.input
           initial={{
             y: 15,
@@ -64,7 +64,7 @@ export default function RecoverPasswordForm({ recoverId }) {
           {...register("password")}
         />
       </FormControl>
-      <FormControl delay={0.4} id="password-confirm" label="Password">
+      <FormControl delay={0.4} id="password-confirm" label="Confirm Password">
         <motion.input
           initial={{
             y: 15,
