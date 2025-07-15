@@ -13,15 +13,20 @@ async function PizzaList({ filter, page }) {
       displayPizzas = pizzas.data;
     }
     if (filter === "cheap") {
-      displayPizzas = pizzas.data.filter((pizza) => pizza?.finalPrice <= 10);
+      displayPizzas = pizzas.data.filter(
+        (pizza) => Number(pizza?.finalPrice) <= 10,
+      );
     }
     if (filter === "moderate") {
       displayPizzas = pizzas?.data.filter(
-        (pizza) => pizza?.finalPrice > 40 && pizza?.finalPrice <= 30,
+        (pizza) =>
+          Number(pizza?.finalPrice) > 10 && Number(pizza?.finalPrice) <= 30,
       );
     }
     if (filter === "expensive") {
-      displayPizzas = pizzas?.data.filter((pizza) => pizza?.finalPrice > 30);
+      displayPizzas = pizzas?.data.filter(
+        (pizza) => Number(pizza?.finalPrice) > 30,
+      );
     }
 
     if (displayPizzas.length === 0) {

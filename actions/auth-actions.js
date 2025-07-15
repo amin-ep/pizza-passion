@@ -54,7 +54,7 @@ export async function verifyEmail(payload) {
     if (res.status === 200) {
       cookies().set({
         name: process.env.JWT_SECRET,
-        value: response.data.token,
+        value: res?.data.token,
         expires: JWT_EXPIRES,
         httpOnly: true,
         maxAge: 90,
