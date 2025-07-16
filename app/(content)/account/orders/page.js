@@ -14,7 +14,7 @@ async function Page() {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-xl text-accent-500">Your orders</p>
-      {orders.length > 0 ? (
+      {orders && orders?.length > 0 ? (
         <OrderList orders={orders} />
       ) : (
         <div className="">

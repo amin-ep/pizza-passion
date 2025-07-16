@@ -8,7 +8,15 @@ export const metadata = {
 
 async function Page() {
   const userData = await getMe();
-  return <div>Welcome, {userData.firstName}</div>;
+  if (userData) {
+    return <div>Welcome, {userData?.firstName ?? "---"}</div>;
+  } else {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 }
 
 export default Page;
